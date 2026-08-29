@@ -14,7 +14,7 @@
 }
 
 .ee-banner {
-  position: relative;
+ position: relative;
 
   width: 100%;
   max-width: 1440px;
@@ -25,6 +25,8 @@
   color: #000;
 
   font-family: "Jost", Arial, sans-serif;
+
+  container-type: inline-size;
 }
 
 
@@ -191,16 +193,19 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 ========================================================= */
 
 .ee-banner__heading {
-  width: 459px;
-  max-width: 100%;
+  width: 31.875%;
+  min-width: max-content;
 
   margin: 0;
   padding: 0;
 
   font-family: "Jost", Arial, sans-serif;
-  font-size: 70px;
+
+  /* 70px at 1440px banner width */
+  font-size: min(70px, 4.861cqw);
+
   font-weight: 500;
-  line-height: 70px;
+  line-height: 1;
 
   letter-spacing: 0;
 
