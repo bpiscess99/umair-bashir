@@ -175,12 +175,13 @@
                     {% for value in option.values %}
 
                       <button
-                        type="button"
-                        class="ee-product-option__color{% if value == selected_value %} is-selected{% endif %}"
-                        data-ee-option-value="{{ value | escape }}"
-                      >
-                        {{ value }}
-                      </button>
+  type="button"
+  class="ee-product-option__color{% if value == selected_value %} is-selected{% endif %}"
+  data-ee-option-value="{{ value | escape }}"
+  style="--ee-swatch: {{ value | downcase }};"
+>
+  {{ value }}
+</button>
 
                     {% endfor %}
 
