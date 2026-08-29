@@ -1,114 +1,315 @@
+/* =========================================================
+   ECOMEXPERTS ASSESSMENT
+   Desktop reference: 1440px
+========================================================= */
+
 .ee-banner,
 .ee-banner * {
   box-sizing: border-box;
 }
 
 .ee-banner {
+  position: relative;
+
   width: 100%;
+  max-width: 1440px;
+
+  margin: 0 auto;
+
   background: #ffffff;
   color: #000000;
+
+  font-family: "Jost", Arial, sans-serif;
 }
 
-/* =========================
+
+/* =========================================================
    TOP BAR
-========================= */
+   Figma:
+   1440 × 64
+   padding: 10px 50px
+   background: #F5F5F5
+========================================================= */
 
 .ee-banner__top {
-  min-height: 64px;
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  height: 64px;
+
+  padding: 10px 50px;
+
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  width: 100%;
-  position: relative;
-  z-index: 3;
-  background: #ffffff;
+
+  background: #f5f5f5;
 }
+
+
+/* Logo */
 
 .ee-banner__logo {
   justify-self: start;
+
+  color: #000000;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 24px;
   font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
 }
+
+
+/* Center message */
 
 .ee-banner__message {
   justify-self: center;
+
+  width: 260px;
+
   text-align: center;
+  white-space: nowrap;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
 }
+
+
+/* Keep top button on right */
 
 .ee-banner__top .ee-button {
   justify-self: end;
 }
 
-/* =========================
+
+/* =========================================================
    HERO
-========================= */
+   Figma artwork: 1440 × 780
+========================================================= */
 
 .ee-banner__hero {
   position: relative;
+
   width: 100%;
-  aspect-ratio: 1440 / 780;
+  height: 780px;
+
   overflow: hidden;
+
+  background: #ffffff;
 }
+
+
+/* Figma artwork */
 
 .ee-banner__image {
   position: absolute;
   inset: 0;
+
+  display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
-  display: block;
+  object-position: center;
 }
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
 
 .ee-banner__content {
   position: absolute;
   z-index: 2;
-  left: 5%;
-  top: 48%;
-  max-width: 430px;
+
+  /*
+    Figma heading:
+    overall top = 489px
+
+    Hero starts after top bar:
+    489 - 64 = 425px
+  */
+  top: 425px;
+  left: 67px;
+
+  width: 480px;
 }
+
+
+/* Heading
+   Figma:
+   459 × 70
+   Jost Medium
+   70px
+   100% line height
+*/
 
 .ee-banner__heading {
+  width: 459px;
+
   margin: 0;
-  font-weight: 700;
+
+  color: #000000;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 70px;
+  font-weight: 500;
   line-height: 1;
+  letter-spacing: 0;
 }
+
+
+/* Description */
 
 .ee-banner__description {
-  margin-top: 32px;
+  width: 480px;
+
+  margin-top: 48px;
+
+  color: #000000;
+
+  font-family: "Jost", Arial, sans-serif;
+
+  /*
+    Approximate until we inspect exact
+    Figma description typography.
+  */
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.25;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+
+/* =========================================================
+   BUTTON BASE
+========================================================= */
 
 .ee-button {
   display: inline-flex;
+
   align-items: center;
   justify-content: space-between;
+
   text-decoration: none;
-  color: inherit;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-weight: 400;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
-.ee-button--yellow {
-  background: #fff200;
-  color: #000;
-}
-
-.ee-button--black {
-  margin-top: 30px;
-  background: #000;
-  color: #fff;
-}
 
 .ee-button__arrow {
-  margin-left: 24px;
+  display: inline-block;
+
+  transition: transform 180ms ease;
 }
 
-/* =========================
-   BOTTOM TEXT
-========================= */
+
+/* Required button animation */
+
+.ee-button:hover .ee-button__arrow {
+  transform: translateX(6px);
+}
+
+
+/* =========================================================
+   YELLOW BUTTON
+   Figma: 207 × 44
+========================================================= */
+
+.ee-button--yellow {
+  width: 207px;
+  height: 44px;
+
+  padding: 0 20px;
+
+  background: #fff200;
+  color: #000000;
+
+  font-size: 16px;
+  line-height: 1;
+}
+
+
+.ee-button--yellow:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   SHOP NOW
+   Figma:
+   220 × 50
+   overall top = 739px
+========================================================= */
+
+.ee-button--black {
+  width: 220px;
+  height: 50px;
+
+  /*
+    Position is controlled by the content flow.
+    This spacing puts it close to Figma's
+    Y = 739px reference.
+  */
+  margin-top: 40px;
+
+  padding: 0 24px;
+
+  background: #000000;
+  color: #ffffff;
+
+  font-size: 16px;
+  line-height: 1;
+}
+
+
+.ee-button--black:hover {
+  background: #fff200;
+  color: #000000;
+}
+
+
+/* =========================================================
+   SUSTAINABILITY STRIP
+========================================================= */
 
 .ee-banner__bottom-text {
-  text-align: center;
-  background: #ffffff;
+  position: absolute;
+  z-index: 3;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  min-height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 20px;
+
+  background: #f5f5f5;
   color: #000000;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+
+  text-align: center;
 }
