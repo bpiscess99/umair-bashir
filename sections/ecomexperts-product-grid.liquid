@@ -12,10 +12,9 @@
 
       {% for product in section.settings.collection.products limit: 6 %}
 
-        <a
-          href="{{ product.url }}"
-          class="ee-product-grid__item"
-        >
+        {% assign selected_variant = product.selected_or_first_available_variant %}
+
+        <div class="ee-product-grid__item">
 
           {% if product.featured_image != blank %}
             {{
@@ -28,15 +27,214 @@
             }}
           {% endif %}
 
-        </a>
+          <button
+            type="button"
+            class="ee-product-grid__hotspot"
+            aria-label="View {{ product.title }}"
+            data-ee-open-modal="ee-product-modal-{{ section.id }}-{{ product.id }}"
+          >
+            +
+          </button>
+
+        </div>
 
       {% endfor %}
 
     </div>
 
+
+    {% comment %}
+      Product quick-view modals
+    {% endcomment %}
+
+    {% for product in section.settings.collection.products limit: 6 %}
+
+      {% assign selected_variant = product.selected_or_first_available_variant %}
+
+      <div
+        class="ee-product-modal"
+        id="ee-product-modal-{{ section.id }}-{{ product.id }}"
+        hidden
+      >
+
+        <button
+          type="button"
+          class="ee-product-modal__overlay"
+          aria-label="Close product"
+          data-ee-close-modal
+        ></button>
+
+        <div
+          class="ee-product-modal__dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="ee-product-title-{{ product.id }}"
+        >
+
+          <button
+            type="button"
+            class="ee-product-modal__close"
+            aria-label="Close"
+            data-ee-close-modal
+          >
+            ×
+          </button>
+
+          <div class="ee-product-modal__top">
+
+            {% if product.featured_image != blank %}
+
+              {{
+                product.featured_image
+                | image_url: width: 400
+                | image_tag:
+                  class: 'ee-product-modal__image',
+                  loading: 'lazy',
+                  alt: product.title
+              }}
+
+            {% endif %}
+
+            <div class="ee-product-modal__info">
+
+              <h3
+                class="ee-product-modal__title"
+                id="ee-product-title-{{ product.id }}"
+              >
+                {{ product.title }}
+              </h3>
+
+              <div
+                class="ee-product-modal__price"
+                data-ee-product-price
+              >
+                {{ selected_variant.price | money }}
+              </div>
+
+              <div class="ee-product-modal__description">
+                {{ product.description | strip_html | truncate: 140 }}
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="ee-product-modal__options">
+
+            {% for option in product.options_with_values %}
+
+              {% assign option_index = option.position | minus: 1 %}
+              {% assign selected_value = selected_variant.options[option_index] %}
+              {% assign option_name = option.name | downcase %}
+
+              <div
+                class="ee-product-option"
+                data-ee-option-group
+              >
+
+                <div class="ee-product-option__label">
+                  {{ option.name }}
+                </div>
+
+
+                {% if option_name contains 'color' or option_name contains 'colour' %}
+
+                  <div class="ee-product-option__colors">
+
+                    {% for value in option.values %}
+
+                      <button
+                        type="button"
+                        class="ee-product-option__color{% if value == selected_value %} is-selected{% endif %}"
+                        data-ee-option-value="{{ value | escape }}"
+                      >
+                        {{ value }}
+                      </button>
+
+                    {% endfor %}
+
+                  </div>
+
+                {% else %}
+
+                  <select class="ee-product-option__select">
+
+                    {% for value in option.values %}
+
+                      <option
+                        value="{{ value | escape }}"
+                        {% if value == selected_value %}selected{% endif %}
+                      >
+                        {{ value }}
+                      </option>
+
+                    {% endfor %}
+
+                  </select>
+
+                {% endif %}
+
+              </div>
+
+            {% endfor %}
+
+          </div>
+
+
+          <button
+            type="button"
+            class="ee-product-modal__add"
+            data-ee-add-to-cart
+            data-variant-id="{{ selected_variant.id }}"
+            {% unless selected_variant.available %}disabled{% endunless %}
+          >
+            {% if selected_variant.available %}
+              ADD TO CART
+              <span>→</span>
+            {% else %}
+              SOLD OUT
+            {% endif %}
+          </button>
+
+          <div
+            class="ee-product-modal__status"
+            data-ee-cart-status
+            aria-live="polite"
+          ></div>
+
+
+          <script
+            type="application/json"
+            class="ee-product-modal__variants"
+          >
+            [
+              {% for variant in product.variants %}
+                {
+                  "id": {{ variant.id | json }},
+                  "available": {{ variant.available | json }},
+                  "options": {{ variant.options | json }},
+                  "price": {{ variant.price | money | json }}
+                }{% unless forloop.last %},{% endunless %}
+              {% endfor %}
+            ]
+          </script>
+
+        </div>
+
+      </div>
+
+    {% endfor %}
+
   {% endif %}
 
 </section>
+
+<script
+  src="{{ 'ecomexperts-assessment.js' | asset_url }}"
+  defer
+></script>
+
 
 {% schema %}
 {
