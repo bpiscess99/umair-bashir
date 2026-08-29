@@ -120,11 +120,11 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 ========================================================= */
 
 .ee-banner__hero {
-  position: relative;
+    position: relative;
 
   width: 100%;
-  height: auto;
-  aspect-ratio: 1440 / 780;
+
+  aspect-ratio: 1440 / 810;
 
   overflow: hidden;
 
@@ -150,9 +150,8 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
     is not cropped on either side.
   */
   object-fit: contain;
-  object-position: center;
+  object-position: center top;
 
-  margin: 0;
 }
 
 
