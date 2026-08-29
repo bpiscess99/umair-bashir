@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Lustria&display=swap');
-
 /* =========================================================
    ECOMEXPERTS ASSESSMENT
    FIGMA DESKTOP REFERENCE: 1440 × 844
@@ -454,7 +453,7 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 }
 
 /* =========================================================
-   PRODUCT QUICK VIEW - DESKTOP FIGMA
+   PRODUCT QUICK VIEW
 ========================================================= */
 
 .ee-product-modal[hidden] {
@@ -473,16 +472,13 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   padding: 20px;
 }
 
-/* Keep this for now.
-   We can adjust/remove dimming after comparing actual Figma overlay. */
 .ee-product-modal__overlay {
   position: absolute;
   inset: 0;
 
-  padding: 0;
   border: 0;
+  background: rgba(0, 0, 0, 0.45);
 
-  background: rgba(0, 0, 0, 0.35);
   cursor: pointer;
 }
 
@@ -491,90 +487,67 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   z-index: 2;
 
   width: 311px;
-  height: 447px;
+  min-height: 447px;
+  max-height: calc(100vh - 40px);
 
-  padding: 0;
+  padding: 36px 20px 15px 17px;
 
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
 
   background: #ffffff;
   color: #000000;
 
   font-family: "Jost", Arial, sans-serif;
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.20);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 
-/* =========================================================
-   CLOSE
-   Figma: 12 × 12
-========================================================= */
+/* Close */
 
 .ee-product-modal__close {
   position: absolute;
-  z-index: 5;
 
-  top: 13px;
-  right: 20px;
+  top: 12px;
+  right: 17px;
 
-  width: 12px;
-  height: 12px;
+  width: 18px;
+  height: 18px;
 
   padding: 0;
   border: 0;
 
-  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  font-size: 0;
+  background: transparent;
+  color: #000;
+
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  line-height: 1;
 
   cursor: pointer;
 }
 
-.ee-product-modal__close::before,
-.ee-product-modal__close::after {
-  content: "";
 
-  position: absolute;
-
-  top: 5px;
-  left: 0;
-
-  width: 12px;
-  height: 1.5px;
-
-  background: #000;
-}
-
-.ee-product-modal__close::before {
-  transform: rotate(45deg);
-}
-
-.ee-product-modal__close::after {
-  transform: rotate(-45deg);
-}
-
-
-/* =========================================================
-   PRODUCT TOP AREA
-========================================================= */
+/* Top product information */
 
 .ee-product-modal__top {
-  position: absolute;
-
-  top: 36px;
-  left: 17px;
-
-  width: 274px;
-
   display: grid;
-  grid-template-columns: 120px 146px;
 
+  grid-template-columns: 120px 1fr;
+
+  /* Important:
+     Figma has a much smaller gap than our previous 16px */
   gap: 8px;
+
+  align-items: start;
 }
-
-
-/* Image - Figma 120 × 140 */
 
 .ee-product-modal__image {
   width: 120px;
@@ -586,30 +559,17 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 }
 
 
-/* Right side information */
-
-.ee-product-modal__info {
-  width: 146px;
-  padding-top: 13px;
-}
-
-
 /* Product title */
 
 .ee-product-modal__title {
-  width: 146px;
-
-  margin: 0;
+  margin: 10px 0 0;
 
   font-family: "Jost", Arial, sans-serif;
-
   font-size: 16px;
   font-weight: 300;
+  line-height: 1.2;
 
-  line-height: 120%;
-  letter-spacing: 0;
-
-  color: #000;
+  color: #000000;
 }
 
 
@@ -617,286 +577,189 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
 .ee-product-modal__price {
   margin-top: 20px;
+  margin-bottom: 0;
 
-  font-family: "Lustria", serif;
-
+  font-family: "Lustria", Georgia, serif;
   font-size: 16px;
   font-weight: 400;
+  line-height: 1.2;
 
-  line-height: 120%;
-
-  color: #000;
+  color: #000000;
 }
 
 
 /* Description */
 
 .ee-product-modal__description {
-  width: 146px;
-
-  margin-top: 12px;
+  margin-top: 14px;
 
   font-family: "Jost", Arial, sans-serif;
-
   font-size: 14px;
   font-weight: 300;
-
-  line-height: 110%;
+  line-height: 1.1;
   letter-spacing: -0.01em;
 
-  color: #000;
+  color: #000000;
 }
 
 
 /* =========================================================
-   OPTIONS AREA
+   PRODUCT OPTIONS
 ========================================================= */
 
 .ee-product-modal__options {
-  position: absolute;
-
-  top: 186px;
-  left: 20px;
-
-  width: 271px;
-
-  margin: 0;
+  margin-top: 8px;
 }
-
-
-/* Individual option */
 
 .ee-product-option {
   margin: 0;
 }
 
 .ee-product-option + .ee-product-option {
-  margin-top: 11px;
+  margin-top: 14px;
 }
-
-
-/* Label - Color / Size */
 
 .ee-product-option__label {
   height: 18px;
 
-  margin: 0 0 6px;
+  margin: 0 0 5px;
 
   font-family: "Jost", Arial, sans-serif;
-
   font-size: 14px;
   font-weight: 400;
-
-  line-height: 130%;
+  line-height: 18px;
 
   color: #333333;
 }
 
 
-/* =========================================================
-   COLOR OPTIONS
-========================================================= */
+/* Color options */
 
 .ee-product-option__colors {
-  width: 271px;
-  height: 40px;
+  width: 100%;
 
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
 }
 
 .ee-product-option__color {
   position: relative;
 
-  height: 40px;
+  height: 42px;
 
   padding: 0 12px 0 15px;
 
-  border: 0.5px solid #000;
-
+  border: 1px solid #8c8c8c;
   border-radius: 0;
 
-  background: #fff;
-  color: #000;
+  display: flex;
+  align-items: center;
+
+  background: #ffffff;
+  color: #000000;
 
   font-family: "Jost", Arial, sans-serif;
-
   font-size: 18px;
   font-weight: 400;
-
-  line-height: 100%;
-
-  letter-spacing: -0.02em;
-
-  text-align: left;
+  line-height: 1;
 
   cursor: pointer;
 }
 
 
-/* Color stripe */
+/* Colored stripe from actual Shopify color value */
 
 .ee-product-option__color::before {
   content: "";
 
   position: absolute;
 
-  top: 0;
-  bottom: 0;
-  left: 0;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
 
   width: 5px;
 
   background: var(--ee-swatch, #000);
-
-  border-right: 0.5px solid #000;
 }
 
 
-/*
-   Don't turn the whole selected option black.
-   That didn't exist in the supplied Figma design.
-*/
+/* Do NOT make selected option completely black */
 
 .ee-product-option__color.is-selected {
-  background: #fff;
-  color: #000;
+  background: #ffffff;
+  color: #000000;
 }
 
 
-/* =========================================================
-   SIZE SELECT
-========================================================= */
+/* Size select */
 
 .ee-product-option__select {
-  width: 271px;
-  height: 40px;
+  width: 100%;
+  height: 44px;
 
-  padding: 0 62px 0 13px;
+  padding: 0 50px 0 14px;
 
-  border: 0.5px solid #000;
-
+  border: 1px solid #8c8c8c;
   border-radius: 0;
 
-  appearance: none;
-  -webkit-appearance: none;
-
-  background-color: #fff;
-
-  /*
-    First background = vertical divider.
-    Second background = dropdown chevron.
-  */
-  background-image:
-    linear-gradient(#888, #888),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1L7 7L13 1' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
-
-  background-repeat: no-repeat;
-
-  background-size:
-    1px 100%,
-    14px 9px;
-
-  background-position:
-    right 55px center,
-    right 18px center;
+  background: #ffffff;
+  color: #000000;
 
   font-family: "Jost", Arial, sans-serif;
-
   font-size: 16px;
   font-weight: 400;
-
-  line-height: 1;
-
-  color: #000;
-
-  cursor: pointer;
 }
 
 
 /* =========================================================
    ADD TO CART
-   Figma: 271 × 45
 ========================================================= */
 
 .ee-product-modal__add {
-  position: absolute;
-
-  left: 20px;
-  top: 377px;
-
-  width: 271px;
+  width: 100%;
   height: 45px;
 
-  margin: 0;
-  padding: 0 27px 0 74px;
+  margin-top: auto;
+
+  padding: 0 20px;
 
   border: 0;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
-  background: #000;
-  color: #fff;
+  position: relative;
+
+  background: #000000;
+  color: #ffffff;
 
   font-family: "Jost", Arial, sans-serif;
-
   font-size: 16px;
   font-weight: 400;
-
-  line-height: 20.48px;
-
   text-transform: uppercase;
 
   cursor: pointer;
 }
 
-
-/* Arrow */
-
 .ee-product-modal__add span {
-  display: inline-flex;
+  position: absolute;
+  right: 22px;
 
-  width: 34px;
-
-  align-items: center;
-  justify-content: flex-end;
-
-  font-size: 27px;
+  font-size: 25px;
   font-weight: 300;
-
-  line-height: 1;
-
-  transition: transform 180ms ease;
 }
-
-.ee-product-modal__add:hover span {
-  transform: translateX(4px);
-}
-
 
 .ee-product-modal__add:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
 
-
-/* Status message */
-
 .ee-product-modal__status {
-  position: absolute;
+  min-height: 0;
 
-  left: 20px;
-  top: 426px;
+  margin: 5px 0 0;
 
-  width: 271px;
-
-  min-height: 14px;
-
-  font-family: "Jost", Arial, sans-serif;
-  font-size: 11px;
-
-  text-align: center;
+  font-size: 12px;
 }

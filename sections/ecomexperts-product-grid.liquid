@@ -152,65 +152,98 @@
 
           <div class="ee-product-modal__options">
 
-            {% for option in product.options_with_values %}
+  {% comment %}
+    Render COLOR first regardless of Shopify option order
+  {% endcomment %}
 
-              {% assign option_index = option.position | minus: 1 %}
-              {% assign selected_value = selected_variant.options[option_index] %}
-              {% assign option_name = option.name | downcase %}
+  {% for option in product.options_with_values %}
 
-              <div
-                class="ee-product-option"
-                data-ee-option-group
-              >
+    {% assign option_name = option.name | downcase %}
 
-                <div class="ee-product-option__label">
-                  {{ option.name }}
-                </div>
+    {% if option_name contains 'color' or option_name contains 'colour' %}
+
+      {% assign option_index = option.position | minus: 1 %}
+      {% assign selected_value = selected_variant.options[option_index] %}
+
+      <div
+        class="ee-product-option"
+        data-ee-option-group
+      >
+
+        <div class="ee-product-option__label">
+          {{ option.name }}
+        </div>
+
+        <div class="ee-product-option__colors">
+
+          {% for value in option.values %}
+
+            {% assign swatch_color = value | downcase %}
+
+            <button
+              type="button"
+              class="ee-product-option__color{% if value == selected_value %} is-selected{% endif %}"
+              data-ee-option-value="{{ value | escape }}"
+              style="--ee-swatch: {{ swatch_color }};"
+            >
+              {{ value }}
+            </button>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    {% endif %}
+
+  {% endfor %}
 
 
-                {% if option_name contains 'color' or option_name contains 'colour' %}
+  {% comment %}
+    Render SIZE and all other options after Color
+  {% endcomment %}
 
-                  <div class="ee-product-option__colors">
+  {% for option in product.options_with_values %}
 
-                    {% for value in option.values %}
+    {% assign option_name = option.name | downcase %}
 
-                      <button
-  type="button"
-  class="ee-product-option__color{% if value == selected_value %} is-selected{% endif %}"
-  data-ee-option-value="{{ value | escape }}"
-  style="--ee-swatch: {{ value | downcase }};"
->
-  {{ value }}
-</button>
+    {% unless option_name contains 'color' or option_name contains 'colour' %}
 
-                    {% endfor %}
+      {% assign option_index = option.position | minus: 1 %}
+      {% assign selected_value = selected_variant.options[option_index] %}
 
-                  </div>
+      <div
+        class="ee-product-option"
+        data-ee-option-group
+      >
 
-                {% else %}
+        <div class="ee-product-option__label">
+          {{ option.name }}
+        </div>
 
-                  <select class="ee-product-option__select">
+        <select class="ee-product-option__select">
 
-                    {% for value in option.values %}
+          {% for value in option.values %}
 
-                      <option
-                        value="{{ value | escape }}"
-                        {% if value == selected_value %}selected{% endif %}
-                      >
-                        {{ value }}
-                      </option>
+            <option
+              value="{{ value | escape }}"
+              {% if value == selected_value %}selected{% endif %}
+            >
+              {{ value }}
+            </option>
 
-                    {% endfor %}
+          {% endfor %}
 
-                  </select>
+        </select>
 
-                {% endif %}
+      </div>
 
-              </div>
+    {% endunless %}
 
-            {% endfor %}
+  {% endfor %}
 
-          </div>
+</div>
 
 
           <button
