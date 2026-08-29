@@ -371,3 +371,44 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
   text-align: center;
 }
+
+
+/* =========================================================
+   PRODUCT GRID
+========================================================= */
+
+.ee-product-grid {
+  width: min(1339px, calc(100% - 100px));
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+.ee-product-grid__heading {
+  margin: 0 0 20px;
+
+  font-family: "Lustria", serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  color: #000;
+}
+
+.ee-product-grid__items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.ee-product-grid__item {
+  display: block;
+  aspect-ratio: 433 / 444;
+  overflow: hidden;
+}
+
+.ee-product-grid__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
