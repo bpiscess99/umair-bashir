@@ -223,19 +223,23 @@
         </div>
 
         <select class="ee-product-option__select">
+  {% if option_name contains 'size' %}
+    <option value="" selected disabled>
+      Choose your size
+    </option>
+  {% endif %}
 
-          {% for value in option.values %}
-
-            <option
-              value="{{ value | escape }}"
-              {% if value == selected_value %}selected{% endif %}
-            >
-              {{ value }}
-            </option>
-
-          {% endfor %}
-
-        </select>
+  {% for value in option.values %}
+    <option
+      value="{{ value | escape }}"
+      {% unless option_name contains 'size' %}
+        {% if value == selected_value %}selected{% endif %}
+      {% endunless %}
+    >
+      {{ value }}
+    </option>
+  {% endfor %}
+</select>
 
       </div>
 
