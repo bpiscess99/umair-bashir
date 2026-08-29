@@ -1,0 +1,114 @@
+.ee-banner,
+.ee-banner * {
+  box-sizing: border-box;
+}
+
+.ee-banner {
+  width: 100%;
+  background: #ffffff;
+  color: #000000;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.ee-banner__top {
+  min-height: 64px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  background: #ffffff;
+}
+
+.ee-banner__logo {
+  justify-self: start;
+  font-weight: 600;
+}
+
+.ee-banner__message {
+  justify-self: center;
+  text-align: center;
+}
+
+.ee-banner__top .ee-button {
+  justify-self: end;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.ee-banner__hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 780;
+  overflow: hidden;
+}
+
+.ee-banner__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ee-banner__content {
+  position: absolute;
+  z-index: 2;
+  left: 5%;
+  top: 48%;
+  max-width: 430px;
+}
+
+.ee-banner__heading {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ee-banner__description {
+  margin-top: 32px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.ee-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ee-button--yellow {
+  background: #fff200;
+  color: #000;
+}
+
+.ee-button--black {
+  margin-top: 30px;
+  background: #000;
+  color: #fff;
+}
+
+.ee-button__arrow {
+  margin-left: 24px;
+}
+
+/* =========================
+   BOTTOM TEXT
+========================= */
+
+.ee-banner__bottom-text {
+  text-align: center;
+  background: #ffffff;
+  color: #000000;
+}
