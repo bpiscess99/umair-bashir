@@ -26,7 +26,10 @@
     },
     "product_grid_1": {
       "type": "ecomexperts-product-grid",
-      "settings": {}
+      "settings": {
+        "heading": "Tisso vison in the wild",
+        "collection": "frontpage"
+      }
     }
   },
   "order": [
