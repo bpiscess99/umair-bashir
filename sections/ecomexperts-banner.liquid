@@ -16,37 +16,61 @@
       href="{{ section.settings.top_button_link }}"
       class="ee-button ee-button--yellow"
     >
-      {{ section.settings.top_button_text }}
-      <span>→</span>
+      <span class="ee-button__text">
+        {{ section.settings.top_button_text }}
+      </span>
+
+      <span class="ee-button__arrow">→</span>
     </a>
 
   </div>
 
-  <div class="ee-banner__content">
 
-    <h1>
-      {{ section.settings.heading }}
-    </h1>
+  <div class="ee-banner__hero">
 
-    <div class="ee-banner__description">
-      {{ section.settings.description }}
+    {% if section.settings.background_image != blank %}
+      {{
+        section.settings.background_image
+        | image_url: width: 2400
+        | image_tag:
+          class: 'ee-banner__image',
+          loading: 'eager'
+      }}
+    {% endif %}
+
+
+    <div class="ee-banner__content">
+
+      <h1 class="ee-banner__heading">
+        {{ section.settings.heading }}
+      </h1>
+
+      <div class="ee-banner__description">
+        {{ section.settings.description }}
+      </div>
+
+      <a
+        href="{{ section.settings.button_link }}"
+        class="ee-button ee-button--black"
+      >
+        <span class="ee-button__text">
+          {{ section.settings.button_text }}
+        </span>
+
+        <span class="ee-button__arrow">→</span>
+      </a>
+
     </div>
 
-    <a
-      href="{{ section.settings.button_link }}"
-      class="ee-button ee-button--black"
-    >
-      {{ section.settings.button_text }}
-      <span>→</span>
-    </a>
-
   </div>
+
 
   <div class="ee-banner__bottom-text">
     {{ section.settings.bottom_text }}
   </div>
 
 </section>
+
 
 {% schema %}
 {
@@ -74,6 +98,11 @@
       "type": "url",
       "id": "top_button_link",
       "label": "Top button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Banner background image"
     },
     {
       "type": "text",
