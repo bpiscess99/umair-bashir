@@ -424,31 +424,32 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 .ee-product-grid__hotspot {
   position: absolute;
 
-  top: 50%;
-  left: 75%;
+  left: var(--ee-hotspot-x);
+  top: var(--ee-hotspot-y);
 
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
 
   padding: 0;
-  border: 0;
+
+  border: 1.5px solid #000;
   border-radius: 50%;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #fff;
+  background: rgba(248, 248, 248, 0.9);
   color: #000;
 
   font-family: Arial, sans-serif;
-  font-size: 22px;
+  font-size: 16px;
+  font-weight: 400;
   line-height: 1;
 
   cursor: pointer;
 
   transform: translate(-50%, -50%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
 
   z-index: 2;
 }
