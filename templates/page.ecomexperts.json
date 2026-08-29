@@ -4,13 +4,13 @@
       "type": "ecomexperts-banner",
       "settings": {}
     },
-    "product_grid": {
+    "product_grid_1": {
       "type": "ecomexperts-product-grid",
       "settings": {}
     }
   },
   "order": [
     "banner",
-    "product_grid"
+    "product_grid_1"
   ]
 }
