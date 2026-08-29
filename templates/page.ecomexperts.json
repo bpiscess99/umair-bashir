@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "banner": {
+      "type": "ecomexperts-banner",
+      "settings": {}
+    },
+    "product_grid": {
+      "type": "ecomexperts-product-grid",
+      "settings": {}
+    }
+  },
+  "order": [
+    "banner",
+    "product_grid"
+  ]
+}
