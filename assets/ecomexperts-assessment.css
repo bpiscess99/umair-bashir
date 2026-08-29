@@ -3,7 +3,9 @@
 
 /* =========================================================
    ECOMEXPERTS ASSESSMENT
-   Desktop reference: 1440px
+   FIGMA DESKTOP REFERENCE: 1440 × 844
+   Top bar: 64px
+   Hero: 1440 × 780
 ========================================================= */
 
 .ee-banner,
@@ -19,19 +21,28 @@
 
   margin: 0 auto;
 
-  background: #ffffff;
-  color: #000000;
+  background: #fff;
+  color: #000;
 
   font-family: "Jost", Arial, sans-serif;
 }
 
 
 /* =========================================================
+   HIDE NORMAL SHOPIFY HEADER / FOOTER
+   ONLY WHERE ECOMEXPERTS BANNER EXISTS
+========================================================= */
+
+body:has(.ee-banner) .shopify-section-group-header-group,
+body:has(.ee-banner) .shopify-section-group-footer-group {
+  display: none !important;
+}
+
+
+/* =========================================================
    TOP BAR
-   Figma:
-   1440 × 64
+   FIGMA: 1440 × 64
    padding: 10px 50px
-   background: #F5F5F5
 ========================================================= */
 
 .ee-banner__top {
@@ -55,11 +66,17 @@
 
 .ee-banner__logo {
   justify-self: start;
+
+  margin: 0;
+
   font-family: "Jost", Arial, sans-serif;
-  font-weight: 500;
   font-size: 24px;
+  font-weight: 500;
   line-height: 1;
+
   white-space: nowrap;
+
+  color: #000;
 }
 
 
@@ -70,17 +87,19 @@
 
   width: 260px;
 
-  text-align: center;
-  white-space: nowrap;
+  margin: 0;
 
   font-family: "Jost", Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1;
+
+  text-align: center;
+  white-space: nowrap;
+
+  color: #000;
 }
 
-
-/* Keep top button on right */
 
 .ee-banner__top .ee-button {
   justify-self: end;
@@ -89,73 +108,124 @@
 
 /* =========================================================
    HERO
-   Figma artwork: 1440 × 780
+
+   IMPORTANT:
+   Do NOT use fixed 780px height here.
+
+   The Shopify editor makes the preview narrower than 1440px.
+   Keeping the 1440 / 780 ratio scales the artwork instead
+   of cropping it.
 ========================================================= */
 
 .ee-banner__hero {
   position: relative;
 
   width: 100%;
-  height: 780px;
+  height: auto;
+  aspect-ratio: 1440 / 780;
 
   overflow: hidden;
 
-  background: #ffffff;
+  background: #fff;
 }
 
 
-/* Figma artwork */
+/* =========================================================
+   BACKGROUND ARTWORK
+========================================================= */
 
 .ee-banner__image {
   position: absolute;
   inset: 0;
 
-  display: block;
-
   width: 100%;
   height: 100%;
 
-  object-fit: cover;
+  display: block;
+
+  /*
+    Contain guarantees the exported Figma artwork
+    is not cropped on either side.
+  */
+  object-fit: contain;
   object-position: center;
+
+  margin: 0;
 }
 
 
 /* =========================================================
    HERO CONTENT
+
+   Figma:
+   Heading left = 67px
+   Heading overall top = 489px
+
+   Hero starts after 64px:
+   489 - 64 = 425px
+
+   Converted to percentages so it scales with the artwork:
+
+   67 / 1440  = 4.6528%
+   425 / 780  = 54.487%
 ========================================================= */
 
 .ee-banner__content {
   position: absolute;
   z-index: 2;
 
-  left: 67px;
-  top: 425px;
+  left: 4.653%;
+  top: 54.487%;
 
-  width: 480px;
+  width: 33.333%;
+  max-width: 480px;
 }
+
+
+/* =========================================================
+   HEADING
+   FIGMA:
+   459 × 70
+   Jost 500
+   70px
+========================================================= */
 
 .ee-banner__heading {
   width: 459px;
+  max-width: 100%;
 
   margin: 0;
+  padding: 0;
 
   font-family: "Jost", Arial, sans-serif;
   font-size: 70px;
   font-weight: 500;
   line-height: 70px;
+
   letter-spacing: 0;
+
+  color: #000;
+
+  white-space: nowrap;
 }
 
-/* Description */
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
 
 .ee-banner__description {
   width: 480px;
+  max-width: 100%;
+
   margin-top: 48px;
 
   font-family: "Jost", Arial, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 22px;
+
+  letter-spacing: 0;
 
   color: #000;
 }
@@ -167,9 +237,10 @@
 
 .ee-button {
   display: inline-flex;
-
   align-items: center;
   justify-content: space-between;
+
+  border: 0;
 
   text-decoration: none;
 
@@ -180,84 +251,89 @@
 
   transition:
     background-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
+    color 180ms ease;
+}
+
+
+/*
+  You were correct:
+  Liquid contains .ee-button__text.
+
+  It did not require CSS to work, but adding this
+  makes its purpose explicit and prevents wrapping.
+*/
+
+.ee-button__text {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 
 .ee-button__arrow {
-  margin-left: auto;
   display: inline-block;
+
+  margin-left: auto;
+
   transition: transform 180ms ease;
 }
 
 
-/* Required button animation */
-
 .ee-button:hover .ee-button__arrow {
-  transform: translateX(6px);
+  transform: translateX(5px);
 }
 
 
 /* =========================================================
-   YELLOW BUTTON
-   Figma: 207 × 44
+   CHOOSE GIFT
+   FIGMA: 207 × 44
 ========================================================= */
 
 .ee-button--yellow {
   width: 207px;
   height: 44px;
-  padding: 0 22px;
+
+  padding: 0 20px;
 
   background: #fff200;
   color: #000;
 
   font-size: 16px;
   font-weight: 400;
-}
-
-.ee-button--yellow .ee-button__arrow {
-  margin-left: auto;
+  line-height: 1;
 }
 
 
 .ee-button--yellow:hover {
-  background: #000000;
-  color: #ffffff;
+  background: #000;
+  color: #fff;
 }
 
 
 /* =========================================================
    SHOP NOW
-   Figma:
-   220 × 50
-   overall top = 739px
+   FIGMA: 220 × 50
 ========================================================= */
 
 .ee-button--black {
   width: 220px;
   height: 50px;
 
-  /*
-    Position is controlled by the content flow.
-    This spacing puts it close to Figma's
-    Y = 739px reference.
-  */
   margin-top: 40px;
 
   padding: 0 24px;
 
-  background: #000000;
-  color: #ffffff;
+  background: #000;
+  color: #fff;
 
   font-size: 16px;
+  font-weight: 400;
   line-height: 1;
 }
 
 
 .ee-button--black:hover {
   background: #fff200;
-  color: #000000;
+  color: #000;
 }
 
 
@@ -273,21 +349,21 @@
   bottom: 0;
 
   width: 100%;
-  min-height: 32px;
+  height: 32px;
+
+  padding: 0 20px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 5px 20px;
-
   background: #f5f5f5;
-  color: #000000;
+  color: #000;
 
   font-family: "Jost", Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 1;
+  line-height: 14px;
 
   text-align: center;
 }
