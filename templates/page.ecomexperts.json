@@ -28,7 +28,7 @@
       "type": "ecomexperts-product-grid",
       "settings": {
         "heading": "Tisso vison in the wild",
-        "collection": "frontpage"
+        "collection": "ecomexperts-assessment"
       }
     }
   },
