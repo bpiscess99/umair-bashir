@@ -52,12 +52,9 @@
 
 .ee-banner__logo {
   justify-self: start;
-
-  color: #000000;
-
   font-family: "Jost", Arial, sans-serif;
+  font-weight: 500;
   font-size: 24px;
-  font-weight: 600;
   line-height: 1;
   white-space: nowrap;
 }
@@ -128,61 +125,36 @@
   position: absolute;
   z-index: 2;
 
-  /*
-    Figma heading:
-    overall top = 489px
-
-    Hero starts after top bar:
-    489 - 64 = 425px
-  */
-  top: 425px;
   left: 67px;
+  top: 425px;
 
   width: 480px;
 }
-
-
-/* Heading
-   Figma:
-   459 × 70
-   Jost Medium
-   70px
-   100% line height
-*/
 
 .ee-banner__heading {
   width: 459px;
 
   margin: 0;
 
-  color: #000000;
-
   font-family: "Jost", Arial, sans-serif;
   font-size: 70px;
   font-weight: 500;
-  line-height: 1;
+  line-height: 70px;
   letter-spacing: 0;
 }
-
 
 /* Description */
 
 .ee-banner__description {
   width: 480px;
-
   margin-top: 48px;
 
-  color: #000000;
-
   font-family: "Jost", Arial, sans-serif;
-
-  /*
-    Approximate until we inspect exact
-    Figma description typography.
-  */
   font-size: 20px;
   font-weight: 400;
   line-height: 1.25;
+
+  color: #000;
 }
 
 
@@ -211,8 +183,8 @@
 
 
 .ee-button__arrow {
+  margin-left: auto;
   display: inline-block;
-
   transition: transform 180ms ease;
 }
 
@@ -232,14 +204,17 @@
 .ee-button--yellow {
   width: 207px;
   height: 44px;
-
-  padding: 0 20px;
+  padding: 0 22px;
 
   background: #fff200;
-  color: #000000;
+  color: #000;
 
   font-size: 16px;
-  line-height: 1;
+  font-weight: 400;
+}
+
+.ee-button--yellow .ee-button__arrow {
+  margin-left: auto;
 }
 
 
