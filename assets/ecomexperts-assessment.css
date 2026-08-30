@@ -1239,3 +1239,152 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   font-family: "Jost", Arial, sans-serif;
   font-size: 12px;
 }
+
+
+/* =========================================================
+   MOBILE PRODUCT GRID
+   FIGMA REFERENCE
+
+   Section width: 342px
+   Heading: 24px / 120%
+   Grid: 2 columns
+   Item: 169px × 186.42px
+   Gap: 4px
+========================================================= */
+
+@media screen and (max-width: 749px) {
+
+  /* =======================================================
+     PRODUCT GRID SECTION
+  ======================================================= */
+
+  .ee-product-grid {
+    width: 342px;
+    max-width: calc(100% - 33px);
+
+    margin: 0 auto;
+
+    /*
+      Space between sustainability strip
+      and "Tisso vison in the wild"
+    */
+    padding: 38px 0 0;
+  }
+
+
+  /* =======================================================
+     HEADING
+
+     FIGMA:
+     248 × 29px
+     Lustria
+     24px
+     120%
+  ======================================================= */
+
+  .ee-product-grid__heading {
+    margin: 0 0 20px;
+
+    padding: 0;
+
+    font-family: "Lustria", Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    letter-spacing: 0;
+
+    color: #000;
+
+    white-space: nowrap;
+  }
+
+
+  /* =======================================================
+     PRODUCT GRID
+
+     FIGMA:
+     Width: 342px
+
+     169px + 4px + 169px = 342px
+
+     Height:
+     186.42px × 3 rows
+     + 4px × 2 gaps
+     = 567.26px
+  ======================================================= */
+
+  .ee-product-grid__items {
+    width: 342px;
+    max-width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 4px;
+    row-gap: 4px;
+  }
+
+
+  /* =======================================================
+     PRODUCT IMAGE CARD
+
+     FIGMA:
+     169 × 186.42
+  ======================================================= */
+
+  .ee-product-grid__item {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 169 / 186.42;
+
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .ee-product-grid__image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    margin: 0;
+    padding: 0;
+  }
+
+
+  /* =======================================================
+     MOBILE HOTSPOT
+
+     FIGMA selected hotspot:
+     approx 15.71 × 15.71px
+
+     Desktop remains 22 × 22.
+  ======================================================= */
+
+  .ee-product-grid__hotspot {
+    width: 16px;
+    height: 16px;
+
+    padding: 0;
+
+    border-width: 1px;
+
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1;
+
+    background: rgba(248, 248, 248, 0.9);
+  }
+
+}
