@@ -1053,66 +1053,108 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
 
 /* =========================================================
-   MOBILE COLOR OPTION BORDER FIX
-   Keep this at the VERY END of the CSS file
+   COLOR OPTIONS
+   DESKTOP + MOBILE
+========================================================= */
+
+.ee-product-option__colors {
+  position: relative;
+
+  width: 100%;
+  height: 42px;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 0;
+
+  border: 1px solid #8c8c8c;
+
+  background: #ffffff;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+.ee-product-option__color {
+  position: relative;
+
+  width: 100%;
+  height: 40px;
+  min-width: 0;
+
+  margin: 0;
+  padding: 0 12px;
+
+  border: 0;
+
+  /* Dynamic Figma color strip */
+  border-left: 5px solid var(--ee-swatch, #000);
+
+  display: flex;
+  align-items: center;
+
+  background: #ffffff;
+  color: #000000;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+
+  text-align: left;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+
+/* Selected color should NOT become black background */
+.ee-product-option__color.is-selected {
+  background: #ffffff;
+  color: #000000;
+}
+
+
+/* =========================================================
+   CENTER DIVIDER
+========================================================= */
+
+.ee-product-option__colors::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 50%;
+
+  width: 1px;
+
+  background: #8c8c8c;
+
+  transform: translateX(-0.5px);
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   MOBILE BORDER FIX
 ========================================================= */
 
 @media screen and (max-width: 749px) {
 
-  .ee-product-option__colors {
-    position: relative;
-
-    width: 100%;
-    height: 42px !important;
-
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    gap: 0;
-
-    border: 1px solid #8c8c8c !important;
-
-    background: #ffffff;
-
-    overflow: hidden;
-
-    box-sizing: border-box;
-  }
-
-
-  .ee-product-option__color {
-    width: 100%;
-    height: 40px !important;
-
-    min-width: 0;
-
-    margin: 0;
-    padding: 0 12px;
-
-    box-sizing: border-box;
-
-    border-top: 0 !important;
-    border-right: 0 !important;
-    border-bottom: 0 !important;
-
-    border-left: 5px solid var(--ee-swatch, #000) !important;
-
-    display: flex;
-    align-items: center;
-
-    background: #fff;
-
-    color: #000;
-
-    font-family: "Jost", Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-
-    white-space: nowrap;
-  }
-
-
-  /* Force bottom border to always remain visible */
+  /*
+    Shopify mobile preview was hiding the bottom edge,
+    so draw it independently.
+  */
   .ee-product-option__colors::before {
     content: "";
 
@@ -1126,30 +1168,7 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
     background: #8c8c8c;
 
-    z-index: 10;
-
-    pointer-events: none;
-  }
-
-
-  /* Force center divider */
-  .ee-product-option__colors::after {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    bottom: 0;
-
-    left: 50%;
-
-    width: 1px;
-
-    background: #8c8c8c;
-
-    transform: translateX(-0.5px);
-
-    z-index: 10;
+    z-index: 6;
 
     pointer-events: none;
   }
