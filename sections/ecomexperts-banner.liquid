@@ -55,9 +55,13 @@
         {{ section.settings.heading }}
       </h1>
 
-      <div class="ee-banner__description">
-        {{ section.settings.description }}
-      </div>
+   <div class="ee-banner__description ee-banner__description--desktop">
+  {{ section.settings.description }}
+</div>
+
+<div class="ee-banner__description ee-banner__description--mobile">
+  {{ section.settings.mobile_description }}
+</div>
 
       <a
         href="{{ section.settings.button_link | default: '#' }}"
@@ -125,6 +129,12 @@
       "label": "Description",
       "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
     },
+    {
+  "type": "text",
+  "id": "mobile_description",
+  "label": "Mobile description",
+  "default": "Discover Joy: Your Ultimate Holiday Gift Destination."
+},
     {
       "type": "text",
       "id": "button_text",
