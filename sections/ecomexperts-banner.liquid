@@ -77,9 +77,15 @@
     </div>
 
     <!-- This belongs at the bottom of the hero -->
-    <div class="ee-banner__bottom-text">
-      {{ section.settings.bottom_text }}
-    </div>
+  <div class="ee-banner__bottom-text">
+  <span class="ee-banner__bottom-text--desktop">
+    {{ section.settings.bottom_text }}
+  </span>
+
+  <span class="ee-banner__bottom-text--mobile">
+    {{ section.settings.mobile_bottom_text }}
+  </span>
+</div>
 
   </div>
 
@@ -151,7 +157,13 @@
       "id": "bottom_text",
       "label": "Bottom text",
       "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
-    }
+    },
+    {
+  "type": "text",
+  "id": "mobile_bottom_text",
+  "label": "Mobile bottom text",
+  "default": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
+}
   ],
   "presets": [
     {
