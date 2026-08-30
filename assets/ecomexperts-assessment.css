@@ -454,18 +454,7 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
 /* =========================================================
    PRODUCT QUICK VIEW
-   Desktop Figma reference:
-   Modal: 311px × 447px
-========================================================= */
-
-.ee-product-grid,
-.ee-product-grid * {
-  box-sizing: border-box;
-}
-
-
-/* =========================================================
-   MODAL WRAPPER
+   Figma desktop modal: 311px × 447px
 ========================================================= */
 
 .ee-product-modal[hidden] {
@@ -484,9 +473,6 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   padding: 20px;
 }
 
-
-/* Dark page overlay */
-
 .ee-product-modal__overlay {
   position: absolute;
   inset: 0;
@@ -502,7 +488,6 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
 /* =========================================================
    MODAL CARD
-   Figma: 311 × 447
 ========================================================= */
 
 .ee-product-modal__dialog {
@@ -511,15 +496,14 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
   width: 311px;
   height: 447px;
-  max-width: 100%;
+
+  max-width: calc(100vw - 40px);
   max-height: calc(100vh - 40px);
 
   padding: 36px 20px 20px;
 
   display: flex;
   flex-direction: column;
-
-  overflow-y: auto;
 
   background: #ffffff;
   color: #000000;
@@ -531,7 +515,7 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
 
 /* =========================================================
-   CLOSE BUTTON
+   CLOSE
 ========================================================= */
 
 .ee-product-modal__close {
@@ -551,7 +535,7 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   justify-content: center;
 
   background: transparent;
-  color: #000000;
+  color: #000;
 
   font-family: Arial, sans-serif;
   font-size: 22px;
@@ -563,21 +547,20 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
 
 /* =========================================================
-   PRODUCT TOP AREA
+   TOP PRODUCT INFORMATION
+   Figma image: 120 × 140
 ========================================================= */
 
 .ee-product-modal__top {
+  width: 100%;
+  height: 140px;
+
   display: grid;
-
   grid-template-columns: 120px minmax(0, 1fr);
-
   column-gap: 8px;
 
-  width: 100%;
+  flex-shrink: 0;
 }
-
-
-/* Figma image: 120 × 140 */
 
 .ee-product-modal__image {
   width: 120px;
@@ -588,21 +571,18 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   object-fit: cover;
 }
 
-
-/* Information next to image */
-
 .ee-product-modal__info {
   min-width: 0;
+  height: 140px;
 
   padding-top: 12px;
+
+  overflow: hidden;
 }
 
 
 /* =========================================================
-   PRODUCT TITLE
-   Figma:
-   Jost Light
-   16px
+   TITLE
 ========================================================= */
 
 .ee-product-modal__title {
@@ -612,37 +592,36 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   font-size: 16px;
   font-weight: 300;
   line-height: 1.2;
-  letter-spacing: 0;
 
-  color: #000000;
+  color: #000;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
 }
 
 
 /* =========================================================
    PRICE
-   Figma:
-   Lustria Regular
-   16px
 ========================================================= */
 
 .ee-product-modal__price {
-  margin-top: 20px;
-  margin-bottom: 0;
+  margin: 20px 0 0;
 
   font-family: "Lustria", Georgia, serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
 
-  color: #000000;
+  color: #000;
 }
 
 
 /* =========================================================
    DESCRIPTION
-   Figma:
-   Jost Light
-   14px
+   Clamp it so top content never becomes taller than image
 ========================================================= */
 
 .ee-product-modal__description {
@@ -654,12 +633,18 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   line-height: 1.1;
   letter-spacing: -0.01em;
 
-  color: #000000;
+  color: #000;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+
+  overflow: hidden;
 }
 
 
 /* =========================================================
-   OPTIONS AREA
+   OPTIONS
 ========================================================= */
 
 .ee-product-modal__options {
@@ -678,9 +663,6 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   margin-top: 14px;
 }
 
-
-/* Option label: Color / Size */
-
 .ee-product-option__label {
   height: 18px;
 
@@ -697,9 +679,6 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
 /* =========================================================
    COLOR OPTIONS
-   Figma:
-   two equal columns
-   no gap
 ========================================================= */
 
 .ee-product-option__colors {
@@ -713,35 +692,32 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
   border: 1px solid #8c8c8c;
 
-  background: #ffffff;
+  background: #fff;
 }
-
-
-/* Individual color option */
 
 .ee-product-option__color {
   position: relative;
 
   width: 100%;
-  min-width: 0;
   height: 40px;
 
   padding: 0 12px;
 
   border: 0;
-  border-left: 5px solid var(--ee-swatch, #000000);
+
+  /* Figma colored strip */
+  border-left: 5px solid var(--ee-swatch, #000);
 
   display: flex;
   align-items: center;
 
-  background: #ffffff;
-  color: #000000;
+  background: #fff;
+  color: #000;
 
   font-family: "Jost", Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 1;
-  letter-spacing: -0.02em;
 
   text-align: left;
 
@@ -749,29 +725,20 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 }
 
 
-/* Divider between the two color options */
+/* Always keep visible separation between two colors */
 
-.ee-product-option__color + .ee-product-option__color {
-  border-left-width: 5px;
+.ee-product-option__color:first-child {
+  border-right: 1px solid #8c8c8c;
 }
 
-
-/*
-  Do NOT fill the whole selected option black.
-  Figma shows the colored vertical swatch instead.
-*/
-
 .ee-product-option__color.is-selected {
-  background: #ffffff;
-  color: #000000;
+  background: #fff;
+  color: #000;
 }
 
 
 /* =========================================================
    SIZE SELECT
-   Figma:
-   full width
-   44px height
 ========================================================= */
 
 .ee-product-option__select {
@@ -783,38 +750,42 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   border: 1px solid #8c8c8c;
   border-radius: 0;
 
-  background-color: #ffffff;
-  color: #000000;
+  appearance: none;
+  -webkit-appearance: none;
+
+  background-color: #fff;
+  color: #000;
 
   font-family: "Jost", Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 1;
 
   cursor: pointer;
 
   /*
-    Adds the Figma-like vertical separator
-    before the native dropdown arrow.
+    1st background = centered Figma-style chevron
+    2nd background = vertical divider
   */
   background-image:
-    linear-gradient(
-      to right,
-      transparent calc(100% - 50px),
-      #8c8c8c calc(100% - 50px),
-      #8c8c8c calc(100% - 49px),
-      transparent calc(100% - 49px)
-    );
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath d='M1 1L7 7L13 1' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E"),
+    linear-gradient(#8c8c8c, #8c8c8c);
 
-  background-repeat: no-repeat;
+  background-repeat:
+    no-repeat,
+    no-repeat;
+
+  background-size:
+    14px 8px,
+    1px 100%;
+
+  background-position:
+    calc(100% - 18px) center,
+    calc(100% - 50px) center;
 }
 
 
 /* =========================================================
    ADD TO CART
-   Figma:
-   width = 271px
-   height = 45px
 ========================================================= */
 
 .ee-product-modal__add {
@@ -827,36 +798,30 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
   padding: 0 20px;
 
-  flex-shrink: 0;
-
   border: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #000000;
-  color: #ffffff;
+  flex-shrink: 0;
+
+  background: #000;
+  color: #fff;
 
   font-family: "Jost", Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 1;
 
   text-transform: uppercase;
 
   cursor: pointer;
 }
 
-
-/* Add-to-cart arrow */
-
 .ee-product-modal__add span {
   position: absolute;
 
   right: 22px;
-
-  display: inline-block;
 
   font-family: Arial, sans-serif;
   font-size: 25px;
@@ -870,9 +835,6 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   transform: translateX(5px);
 }
 
-
-/* Disabled variant */
-
 .ee-product-modal__add:disabled {
   opacity: 0.45;
 
@@ -881,7 +843,7 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
 
 /* =========================================================
-   CART STATUS MESSAGE
+   CART STATUS
 ========================================================= */
 
 .ee-product-modal__status {
@@ -891,6 +853,4 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
   font-family: "Jost", Arial, sans-serif;
   font-size: 12px;
-  font-weight: 400;
-  line-height: 1.2;
 }
