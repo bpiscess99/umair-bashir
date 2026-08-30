@@ -548,15 +548,21 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
 /* =========================================================
    TOP PRODUCT INFORMATION
-   Figma image: 120 × 140
+   Figma:
+   image = 120 × 140
+   image left = 17px
+   text left = 145px
+   text width ≈ 146px
 ========================================================= */
 
 .ee-product-modal__top {
-  width: 100%;
+  width: 274px;
   height: 140px;
 
+  margin-left: -3px;
+
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
+  grid-template-columns: 120px 146px;
   column-gap: 8px;
 
   flex-shrink: 0;
@@ -567,23 +573,21 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   height: 140px;
 
   display: block;
-
   object-fit: cover;
 }
 
 .ee-product-modal__info {
   min-width: 0;
-  height: 140px;
 
   padding-top: 12px;
 
-  overflow: hidden;
+  /* IMPORTANT:
+     don't clip the description at the image height */
+  overflow: visible;
 }
 
 
-/* =========================================================
-   TITLE
-========================================================= */
+/* Product title */
 
 .ee-product-modal__title {
   margin: 0;
@@ -595,17 +599,11 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
   color: #000;
 
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-
   overflow: hidden;
 }
 
 
-/* =========================================================
-   PRICE
-========================================================= */
+/* Price */
 
 .ee-product-modal__price {
   margin: 20px 0 0;
@@ -619,13 +617,14 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 }
 
 
-/* =========================================================
-   DESCRIPTION
-   Clamp it so top content never becomes taller than image
-========================================================= */
+/* Description */
 
 .ee-product-modal__description {
   margin-top: 14px;
+
+  max-height: 61.6px;
+
+  overflow: hidden;
 
   font-family: "Jost", Arial, sans-serif;
   font-size: 14px;
@@ -634,14 +633,7 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   letter-spacing: -0.01em;
 
   color: #000;
-
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-
-  overflow: hidden;
 }
-
 
 /* =========================================================
    OPTIONS
