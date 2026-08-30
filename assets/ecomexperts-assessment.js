@@ -181,58 +181,117 @@ function updateVariant() {
     addButton.innerHTML = "SOLD OUT";
   }
 }
+updateVariant();
 
-      addButton?.addEventListener("click", async () => {
-        const variantId = Number(addButton.dataset.variantId);
+     addButton?.addEventListener("click", async () => {
+  const variantId = Number(addButton.dataset.variantId);
 
-        if (!variantId) return;
+  if (!variantId) return;
 
-        const originalContent = addButton.innerHTML;
+  /*
+   * Get currently selected product options.
+   * Example:
+   * ["Black", "M"]
+   */
+  const selectedOptions = getSelectedOptions();
 
-        addButton.disabled = true;
-        addButton.textContent = "ADDING...";
+  const normalizedOptions = selectedOptions.map((option) =>
+    String(option || "").trim().toLowerCase(),
+  );
 
-        statusElement.textContent = "";
+  /*
+   * Assessment requirement:
+   * If Black + Medium/M is selected,
+   * automatically add Soft Winter Jacket as well.
+   */
+  const hasBlack = normalizedOptions.includes("black");
 
-        try {
-          const response = await fetch(
-            window.Shopify.routes.root + "cart/add.js",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                items: [
-                  {
-                    id: variantId,
-                    quantity: 1,
-                  },
-                ],
-              }),
-            },
-          );
+  const hasMedium =
+    normalizedOptions.includes("medium") ||
+    normalizedOptions.includes("m");
 
-          if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.description || "Unable to add product.");
-          }
+  /*
+   * Normal product being added.
+   */
+  const items = [
+    {
+      id: variantId,
+      quantity: 1,
+    },
+  ];
 
-          await response.json();
+  /*
+   * Bonus product logic
+   */
+  if (hasBlack && hasMedium) {
+    const productGrid = modal.closest(".ee-product-grid");
 
-          addButton.textContent = "ADDED TO CART ✓";
-          statusElement.textContent = "Product added successfully.";
+    const bonusVariantId = Number(
+      productGrid?.dataset.eeBonusVariantId,
+    );
 
-          setTimeout(() => {
-            updateVariant();
-          }, 1400);
-        } catch (error) {
-          addButton.disabled = false;
-          addButton.innerHTML = originalContent;
-
-          statusElement.textContent = error.message || "Something went wrong.";
-        }
+    if (bonusVariantId && bonusVariantId !== variantId) {
+      items.push({
+        id: bonusVariantId,
+        quantity: 1,
       });
+    }
+  }
+
+  const originalContent = addButton.innerHTML;
+
+  addButton.disabled = true;
+  addButton.textContent = "ADDING...";
+
+  statusElement.textContent = "";
+
+  try {
+    const response = await fetch(
+      window.Shopify.routes.root + "cart/add.js",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          items,
+        }),
+      },
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+
+      throw new Error(
+        error.description || "Unable to add product.",
+      );
+    }
+
+    await response.json();
+
+    addButton.textContent = "ADDED TO CART ✓";
+
+    if (hasBlack && hasMedium) {
+      statusElement.textContent =
+        "Product and Soft Winter Jacket added successfully.";
+    } else {
+      statusElement.textContent =
+        "Product added successfully.";
+    }
+
+    setTimeout(() => {
+      updateVariant();
+    }, 1400);
+
+  } catch (error) {
+    addButton.disabled = false;
+    addButton.innerHTML = originalContent;
+
+    statusElement.textContent =
+      error.message || "Something went wrong.";
+  }
+});
     });
 
     document.addEventListener("keydown", (event) => {

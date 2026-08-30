@@ -1,6 +1,12 @@
 {{ 'ecomexperts-assessment.css' | asset_url | stylesheet_tag }}
 
-<section class="ee-product-grid">
+{% assign bonus_variant = section.settings.bonus_product.selected_or_first_available_variant %}
+
+
+<section 
+class="ee-product-grid"
+data-ee-bonus-variant-id="{{ bonus_variant.id }}"
+>
 
   <h2 class="ee-product-grid__heading">
     {{ section.settings.heading }}
@@ -472,7 +478,12 @@
       "type": "product",
       "id": "product_6",
       "label": "Product 6"
-    }
+    },
+    {
+  "type": "product",
+  "id": "bonus_product",
+  "label": "Bonus product"
+}
 
   ],
 
