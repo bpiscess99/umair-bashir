@@ -31,12 +31,12 @@
       "type": "ecomexperts-product-grid",
       "settings": {
         "heading": "Tisso vison in the wild",
-        "product_1": "",
-        "product_2": "",
-        "product_3": "",
-        "product_4": "",
-        "product_5": "",
-        "product_6": "",
+        "product_1": "black-leather-bag",
+        "product_2": "blue-silk-tuxedo",
+        "product_3": "chequered-red-shirt",
+        "product_4": "classic-leather-jacket",
+        "product_5": "classic-varsity-top",
+        "product_6": "dark-denim-top",
         "bonus_product": "dark-winter-jacket"
       }
     }
