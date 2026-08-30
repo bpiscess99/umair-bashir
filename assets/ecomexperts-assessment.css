@@ -452,6 +452,12 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   z-index: 2;
 }
 
+/* Keep modal measurements predictable */
+.ee-product-modal,
+.ee-product-modal * {
+  box-sizing: border-box;
+}
+
 /* =========================================================
    PRODUCT QUICK VIEW
    Figma desktop modal: 311px × 447px
@@ -685,19 +691,22 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   border: 1px solid #8c8c8c;
 
   background: #fff;
+
+  /* prevents child borders/padding escaping the box */
+  overflow: hidden;
 }
 
 .ee-product-option__color {
   position: relative;
 
   width: 100%;
-  height: 40px;
+  height: 100%;
+
+  min-width: 0;
 
   padding: 0 12px;
 
   border: 0;
-
-  /* Figma colored strip */
   border-left: 5px solid var(--ee-swatch, #000);
 
   display: flex;
@@ -711,17 +720,24 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
   font-weight: 400;
   line-height: 1;
 
+  white-space: nowrap;
+
   text-align: left;
 
   cursor: pointer;
+
+  box-sizing: border-box;
 }
 
-
-/* Always keep visible separation between two colors */
-
-.ee-product-option__color:first-child {
-  border-right: 1px solid #8c8c8c;
+/* Visible divider between option 1 and option 2 */
+.ee-product-option__color + .ee-product-option__color {
+  border-left-width: 5px;
 }
+
+/*
+  The second button already has its colored 5px strip.
+  This creates the Figma-style center separation naturally.
+*/
 
 .ee-product-option__color.is-selected {
   background: #fff;
