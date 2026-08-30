@@ -522,58 +522,70 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
      MOBILE CONTENT
   ======================================================= */
 
-  .ee-banner__content {
-    position: absolute;
-    inset: 0;
+.ee-banner__content {
+  position: absolute;
+  inset: 0;
 
-    z-index: 2;
+  width: 100%;
+  max-width: none;
+  height: 100%;
 
-    width: 100%;
-    max-width: none;
+  z-index: 2;
+}
 
-    padding-top: 49px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    text-align: center;
-  }
 
   .ee-banner__heading {
-    width: auto;
-    min-width: 0;
+  position: absolute;
 
-    margin: 0;
+  top: 49px;
+  left: 50%;
 
-    font-size: 30px;
-    font-weight: 500;
-    line-height: 30px;
+  width: auto;
+  min-width: 0;
 
-    white-space: nowrap;
-  }
+  margin: 0;
+  padding: 0;
+
+  transform: translateX(-50%);
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 30px;
+
+  white-space: nowrap;
+
+  text-align: center;
+}
 
   .ee-banner__description--desktop {
-    display: none;
-  }
+  display: none;
+}
 
   .ee-banner__description--mobile {
-    width: 340px;
-    max-width: calc(100% - 32px);
+  position: absolute;
 
-    margin-top: 18px;
+  top: 103px;
+  left: 50%;
 
-    display: block;
+  width: 340px;
+  max-width: calc(100% - 34px);
 
-    font-family: "Jost", Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20.8px;
+  margin: 0;
 
-    text-align: center;
+  display: block;
 
-    color: #000;
-  }
+  transform: translateX(-50%);
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20.8px;
+
+  text-align: center;
+
+  color: #000;
+}
 
 
   /* =======================================================
@@ -581,24 +593,24 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
      FIGMA approx: 193 × 45
   ======================================================= */
 
-  .ee-button--black {
-    position: absolute;
+ .ee-button--black {
+  position: absolute;
 
-    top: 245px;
-    left: 50%;
+  top: 337px;
+  left: 50%;
 
-    width: 193px;
-    height: 45px;
+  width: 193px;
+  height: 45px;
 
-    margin: 0;
-    padding: 0 20px;
+  margin: 0;
+  padding: 0 20px;
 
-    transform: translateX(-50%);
+  transform: translateX(-50%);
 
-    font-size: 16px;
+  font-size: 16px;
 
-    z-index: 3;
-  }
+  z-index: 3;
+}
 
 
   /* =======================================================
