@@ -1,0 +1,42 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "ecomexperts-banner",
+      "settings": {
+        "logo_text": "TISSO VISON",
+        "top_message": "Find the ideal gift for your loved ones.",
+        "top_button_text": "CHOOSE GIFT",
+        "top_button_link": "",
+        "background_image": "shopify://shop_images/Group_1000008197.png",
+        "mobile_background_image": "shopify://shop_images/Frame.png",
+        "heading": "The Gift Guide",
+        "description": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+        "mobile_description": "Discover Joy: Your Ultimate Holiday Gift Destination.",
+        "button_text": "SHOP NOW",
+        "button_link": "",
+        "bottom_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL",
+        "mobile_bottom_text": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
+      }
+    },
+    "product_grid_1": {
+      "type": "ecomexperts-product-grid",
+      "settings": {
+        "heading": "Tisso vison in the wild",
+        "collection": "ecomexperts-assessment"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product_grid_1"
+  ]
+}

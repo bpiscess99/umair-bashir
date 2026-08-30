@@ -1,0 +1,1440 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Lustria&display=swap');
+/* =========================================================
+   ECOMEXPERTS ASSESSMENT
+   FIGMA DESKTOP REFERENCE: 1440 × 844
+   Top bar: 64px
+   Hero: 1440 × 780
+========================================================= */
+
+.ee-banner,
+.ee-banner * {
+  box-sizing: border-box;
+}
+
+.ee-banner {
+ position: relative;
+
+  width: 100%;
+  max-width: 1440px;
+
+  margin: 0 auto;
+
+  background: #fff;
+  color: #000;
+
+  font-family: "Jost", Arial, sans-serif;
+
+  container-type: inline-size;
+}
+
+
+/* =========================================================
+   HIDE NORMAL SHOPIFY HEADER / FOOTER
+   ONLY WHERE ECOMEXPERTS BANNER EXISTS
+========================================================= */
+
+body:has(.ee-banner) .shopify-section-group-header-group,
+body:has(.ee-banner) .shopify-section-group-footer-group {
+  display: none !important;
+}
+
+
+/* =========================================================
+   TOP BAR
+   FIGMA: 1440 × 64
+   padding: 10px 50px
+========================================================= */
+
+.ee-banner__top {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  height: 64px;
+
+  padding: 10px 50px;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  background: #f5f5f5;
+}
+
+
+/* Logo */
+
+.ee-banner__logo {
+  justify-self: start;
+
+  margin: 0;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+
+  white-space: nowrap;
+
+  color: #000;
+}
+
+
+/* Center message */
+
+.ee-banner__message {
+  justify-self: center;
+
+  width: 260px;
+
+  margin: 0;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+
+  text-align: center;
+  white-space: nowrap;
+
+  color: #000;
+}
+
+
+.ee-banner__top .ee-button {
+  justify-self: end;
+}
+
+
+/* =========================================================
+   HERO
+
+   IMPORTANT:
+   Do NOT use fixed 780px height here.
+
+   The Shopify editor makes the preview narrower than 1440px.
+   Keeping the 1440 / 780 ratio scales the artwork instead
+   of cropping it.
+========================================================= */
+
+.ee-banner__hero {
+  position: relative;
+
+  width: 100%;
+  height: auto;
+
+  aspect-ratio: 1440 / 780;
+
+  overflow: hidden;
+
+  background: #fff;
+}
+
+
+/* =========================================================
+   BACKGROUND ARTWORK
+========================================================= */
+
+.ee-banner__image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  /*
+    Contain guarantees the exported Figma artwork
+    is not cropped on either side.
+  */
+  object-fit: contain;
+  object-position: center top;
+
+}
+
+
+/* =========================================================
+   HERO CONTENT
+
+   Figma:
+   Heading left = 67px
+   Heading overall top = 489px
+
+   Hero starts after 64px:
+   489 - 64 = 425px
+
+   Converted to percentages so it scales with the artwork:
+
+   67 / 1440  = 4.6528%
+   425 / 780  = 54.487%
+========================================================= */
+
+.ee-banner__content {
+  position: absolute;
+  z-index: 2;
+
+  left: 4.653%;
+  top: 54.487%;
+
+  width: 33.333%;
+  max-width: 480px;
+}
+
+
+/* =========================================================
+   HEADING
+   FIGMA:
+   459 × 70
+   Jost 500
+   70px
+========================================================= */
+
+.ee-banner__heading {
+  width: 31.875%;
+  min-width: max-content;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: "Jost", Arial, sans-serif;
+
+  /* 70px at 1440px banner width */
+  font-size: min(70px, 4.861cqw);
+
+  font-weight: 500;
+  line-height: 1;
+
+  letter-spacing: 0;
+
+  color: #000;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.ee-banner__description {
+  width: 455px;
+  max-width: 100%;
+
+  margin-top: 48px;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+
+  letter-spacing: 0;
+
+  color: #000;
+}
+
+
+/* =========================================================
+   BUTTON BASE
+========================================================= */
+
+.ee-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 0;
+
+  text-decoration: none;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-weight: 400;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+
+/*
+  You were correct:
+  Liquid contains .ee-button__text.
+
+  It did not require CSS to work, but adding this
+  makes its purpose explicit and prevents wrapping.
+*/
+
+.ee-button__text {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+
+.ee-button__arrow {
+  display: inline-block;
+
+  margin-left: auto;
+
+  transition: transform 180ms ease;
+}
+
+
+.ee-button:hover .ee-button__arrow {
+  transform: translateX(5px);
+}
+
+
+/* =========================================================
+   CHOOSE GIFT
+   FIGMA: 207 × 44
+========================================================= */
+
+.ee-button--yellow {
+  width: 207px;
+  height: 44px;
+
+  padding: 0 20px;
+
+  background: #fff200;
+  color: #000;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+
+.ee-button--yellow:hover {
+  background: #000;
+  color: #fff;
+}
+
+
+/* =========================================================
+   SHOP NOW
+   FIGMA: 220 × 50
+========================================================= */
+
+.ee-button--black {
+  width: 220px;
+  height: 50px;
+
+  margin-top: 40px;
+
+  padding: 0 24px;
+
+  background: #000;
+  color: #fff;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+
+.ee-button--black:hover {
+  background: #fff200;
+  color: #000;
+}
+
+
+/* =========================================================
+   SUSTAINABILITY STRIP
+========================================================= */
+
+.ee-banner__bottom-text {
+  position: absolute;
+  z-index: 3;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 32px;
+
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f5f5f5;
+  color: #000;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+
+  text-align: center;
+}
+/* =========================================================
+   MOBILE BANNER
+   FIGMA REFERENCE: 375px
+========================================================= */
+
+.ee-banner__menu-toggle {
+  display: none;
+}
+
+.ee-banner__bottom-text--mobile {
+  display: none;
+}
+
+.ee-banner__description--mobile {
+  display: none;
+}
+.ee-banner__image--mobile {
+  display: none;
+}
+
+.ee-banner__mobile-menu {
+  display: none;
+}
+
+.ee-banner__mobile-menu[hidden] {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+
+  .ee-banner {
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+
+  /* =======================================================
+     MOBILE HEADER
+     Figma: 375 × 65
+  ======================================================= */
+
+  .ee-banner__top {
+    position: relative;
+
+    width: 100%;
+    height: 65px;
+
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f7f7f7;
+  }
+
+  .ee-banner__menu-toggle {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+
+    width: 18px;
+    height: 14px;
+
+    padding: 0;
+    border: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    transform: translateY(-50%);
+
+    background: transparent;
+
+    cursor: pointer;
+  }
+
+  .ee-banner__menu-toggle span {
+    width: 18px;
+    height: 2px;
+
+    display: block;
+
+    background: #000;
+  }
+
+  .ee-banner__logo {
+    margin: 0;
+
+    font-family: "Jost", Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+
+    text-align: center;
+  }
+
+  .ee-banner__message,
+  .ee-banner__top .ee-button--yellow {
+    display: none;
+  }
+
+
+  /* =======================================================
+     MOBILE HERO
+     FIGMA: 375 × 421
+  ======================================================= */
+
+  .ee-banner__hero {
+    position: relative;
+
+    width: 100%;
+    height: 421px;
+
+    aspect-ratio: auto;
+
+    overflow: hidden;
+
+    background: #fff;
+  }
+
+
+  /* =======================================================
+     MOBILE ARTWORK
+  ======================================================= */
+
+  .ee-banner__image--desktop {
+  display: none;
+}
+
+.ee-banner__image--mobile {
+  position: absolute;
+
+  display: block;
+
+  /*
+    Exact Figma mobile artwork frame:
+    width: 686px
+    height: 264px
+    top: 157px
+    left: -140px
+  */
+  width: 686px;
+  max-width: none;
+  height: 264px;
+
+  top: 157px;
+  left: -140px;
+
+  object-fit: fill;
+
+  transform: none;
+
+  z-index: 0;
+}
+
+/* =======================================================
+   MOBILE MENU OPEN STATE
+======================================================= */
+
+.ee-banner__mobile-menu {
+  position: absolute;
+
+  top: 65px;
+  left: 0;
+  z-index: 20;
+
+  width: 100%;
+  height: 178px;
+
+  padding: 22px 16px 28px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #f7f7f7;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Message */
+
+.ee-banner__mobile-menu-message {
+  width: 100%;
+
+  margin: 0;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20.8px;
+
+  text-align: center;
+
+  color: #000;
+}
+
+
+/* Yellow mobile menu button */
+
+.ee-banner__mobile-menu-button {
+  width: 207px;
+  height: 44px;
+
+  margin-top: 18px;
+}
+
+
+/* =======================================================
+   HAMBURGER → X
+======================================================= */
+
+.ee-banner__menu-toggle span {
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.ee-banner__menu-toggle.is-open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.ee-banner__menu-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.ee-banner__menu-toggle.is-open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+
+  /* =======================================================
+     MOBILE CONTENT
+  ======================================================= */
+
+.ee-banner__content {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  max-width: none;
+  height: 100%;
+
+  z-index: 2;
+}
+
+
+  .ee-banner__heading {
+  position: absolute;
+
+  top: 49px;
+  left: 50%;
+
+  width: auto;
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+
+  transform: translateX(-50%);
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 30px;
+
+  white-space: nowrap;
+
+  text-align: center;
+}
+
+  .ee-banner__description--desktop {
+  display: none;
+}
+
+  .ee-banner__description--mobile {
+  position: absolute;
+
+  top: 103px;
+  left: 50%;
+
+  width: 340px;
+  max-width: calc(100% - 34px);
+
+  margin: 0;
+
+  display: block;
+
+  transform: translateX(-50%);
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20.8px;
+
+  text-align: center;
+
+  color: #000;
+}
+
+
+  /* =======================================================
+     SHOP NOW
+     FIGMA approx: 193 × 45
+  ======================================================= */
+
+ .ee-button--black {
+  position: absolute;
+
+  top: 337px;
+  left: 50%;
+
+  width: 193px;
+  height: 45px;
+
+  margin: 0;
+  padding: 0 20px;
+
+  transform: translateX(-50%);
+
+  font-size: 16px;
+
+  z-index: 3;
+}
+
+
+  /* =======================================================
+     BOTTOM STRIP
+     FIGMA: 375 × 34
+  ======================================================= */
+
+  .ee-banner__bottom-text {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    z-index: 4;
+
+    width: 100%;
+    height: 34px;
+
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f5f5f5;
+    color: #000;
+
+    text-align: center;
+  }
+
+  .ee-banner__bottom-text--desktop {
+    display: none;
+  }
+
+  .ee-banner__bottom-text--mobile {
+    display: block;
+
+    font-family: "Jost", Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1;
+
+    letter-spacing: 0;
+
+    white-space: nowrap;
+  }
+}
+
+/* =========================================================
+   PRODUCT GRID
+========================================================= */
+
+.ee-product-grid {
+  width: min(1339px, calc(100% - 100px));
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+.ee-product-grid__heading {
+  margin: 0 0 20px;
+
+  font-family: "Lustria", serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  color: #000;
+}
+
+.ee-product-grid__items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.ee-product-grid__item {
+  display: block;
+  aspect-ratio: 433 / 444;
+  overflow: hidden;
+}
+
+.ee-product-grid__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* =========================================================
+   PRODUCT HOTSPOT
+========================================================= */
+
+.ee-product-grid__item {
+  position: relative;
+}
+
+.ee-product-grid__hotspot {
+  position: absolute;
+
+  left: var(--ee-hotspot-x);
+  top: var(--ee-hotspot-y);
+
+  width: 22px;
+  height: 22px;
+
+  padding: 0;
+
+  border: 1.5px solid #000;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(248, 248, 248, 0.9);
+  color: #000;
+
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 2;
+}
+
+/* Keep modal measurements predictable */
+.ee-product-modal,
+.ee-product-modal * {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   PRODUCT QUICK VIEW
+   Figma desktop modal: 311px × 447px
+========================================================= */
+
+.ee-product-modal[hidden] {
+  display: none;
+}
+
+.ee-product-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+.ee-product-modal__overlay {
+  position: absolute;
+  inset: 0;
+
+  padding: 0;
+  border: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MODAL CARD
+========================================================= */
+
+.ee-product-modal__dialog {
+  position: relative;
+  z-index: 2;
+
+  width: 311px;
+  height: 447px;
+
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 40px);
+
+  padding: 36px 20px 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+  color: #000000;
+
+  font-family: "Jost", Arial, sans-serif;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.ee-product-modal__close {
+  position: absolute;
+
+  top: 12px;
+  right: 17px;
+
+  width: 18px;
+  height: 18px;
+
+  padding: 0;
+  border: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  color: #000;
+
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   TOP PRODUCT INFORMATION
+   Figma:
+   image = 120 × 140
+   image left = 17px
+   text left = 145px
+   text width ≈ 146px
+========================================================= */
+
+.ee-product-modal__top {
+  width: 274px;
+  height: 140px;
+
+  margin-left: -3px;
+
+  display: grid;
+  grid-template-columns: 120px 146px;
+  column-gap: 8px;
+
+  flex-shrink: 0;
+}
+
+.ee-product-modal__image {
+  width: 120px;
+  height: 140px;
+
+  display: block;
+  object-fit: cover;
+}
+
+.ee-product-modal__info {
+  min-width: 0;
+
+  padding-top: 12px;
+
+  /* IMPORTANT:
+     don't clip the description at the image height */
+  overflow: visible;
+}
+
+
+/* Product title */
+
+.ee-product-modal__title {
+  margin: 0;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.2;
+
+  color: #000;
+
+  overflow: hidden;
+}
+
+
+/* Price */
+
+.ee-product-modal__price {
+  margin: 20px 0 0;
+
+  font-family: "Lustria", Georgia, serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  color: #000;
+}
+
+
+/* Description */
+
+.ee-product-modal__description {
+  margin-top: 14px;
+
+  max-height: 61.6px;
+
+  overflow: hidden;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+
+  color: #000;
+}
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+.ee-product-modal__options {
+  width: 100%;
+
+  margin-top: 8px;
+}
+
+.ee-product-option {
+  width: 100%;
+
+  margin: 0;
+}
+
+.ee-product-option + .ee-product-option {
+  margin-top: 14px;
+}
+
+.ee-product-option__label {
+  height: 18px;
+
+  margin: 0 0 5px;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+
+  color: #333333;
+}
+
+
+/* =========================================================
+   COLOR OPTIONS
+   DESKTOP + MOBILE
+========================================================= */
+
+.ee-product-option__colors {
+  position: relative;
+
+  width: 100%;
+  height: 42px;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 0;
+
+  background: #fff;
+
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   COMPLETE OUTER BORDER
+========================================================= */
+
+.ee-product-option__colors::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border: 1px solid #8c8c8c;
+
+  box-sizing: border-box;
+
+  pointer-events: none;
+
+  z-index: 10;
+}
+
+
+/* =========================================================
+   COLOR BUTTON
+========================================================= */
+
+.ee-product-option__color {
+  position: relative;
+
+  width: 100%;
+  height: 42px;
+  min-width: 0;
+
+  margin: 0;
+
+  /* Important: no colored border here anymore */
+  border: 0;
+
+  padding: 0 12px 0 17px;
+
+  display: flex;
+  align-items: center;
+
+  background: #fff;
+  color: #000;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+
+  text-align: left;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ACTUAL FIGMA COLOR STRIP
+========================================================= */
+
+.ee-product-option__color::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 5px;
+  height: 100%;
+
+  background: var(--ee-swatch, #000);
+
+  pointer-events: none;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   CENTER DIVIDER
+   The second option's colored strip sits over this divider.
+========================================================= */
+
+.ee-product-option__color + .ee-product-option__color {
+  border-left: 1px solid #8c8c8c;
+}
+
+
+/* Keep selected option same as Figma */
+.ee-product-option__color.is-selected {
+  background: #fff;
+  color: #000;
+}
+
+/* =========================================================
+   SIZE SELECT
+========================================================= */
+
+.ee-product-option__select {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 50px 0 14px;
+
+  border: 1px solid #8c8c8c;
+  border-radius: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background-color: #fff;
+  color: #000;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
+  cursor: pointer;
+
+  /*
+    1st background = centered Figma-style chevron
+    2nd background = vertical divider
+  */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath d='M1 1L7 7L13 1' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E"),
+    linear-gradient(#8c8c8c, #8c8c8c);
+
+  background-repeat:
+    no-repeat,
+    no-repeat;
+
+  background-size:
+    14px 8px,
+    1px 100%;
+
+  background-position:
+    calc(100% - 18px) center,
+    calc(100% - 50px) center;
+}
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+.ee-product-modal__add {
+  position: relative;
+
+  width: 100%;
+  height: 45px;
+
+  margin-top: auto;
+
+  padding: 0 20px;
+
+  border: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  background: #000;
+  color: #fff;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.ee-product-modal__add span {
+  position: absolute;
+
+  right: 22px;
+
+  font-family: Arial, sans-serif;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1;
+
+  transition: transform 180ms ease;
+}
+
+.ee-product-modal__add:hover span {
+  transform: translateX(5px);
+}
+
+.ee-product-modal__add:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   CART STATUS
+========================================================= */
+
+.ee-product-modal__status {
+  min-height: 0;
+
+  margin: 5px 0 0;
+
+  font-family: "Jost", Arial, sans-serif;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   MOBILE PRODUCT GRID
+   FIGMA REFERENCE
+
+   Section width: 342px
+   Heading: 24px / 120%
+   Grid: 2 columns
+   Item: 169px × 186.42px
+   Gap: 4px
+========================================================= */
+
+@media screen and (max-width: 749px) {
+
+  /* =======================================================
+     PRODUCT GRID SECTION
+  ======================================================= */
+
+  .ee-product-grid {
+    width: 342px;
+    max-width: calc(100% - 33px);
+
+    margin: 0 auto;
+
+    /*
+      Space between sustainability strip
+      and "Tisso vison in the wild"
+    */
+    padding: 38px 0 0;
+  }
+
+
+  /* =======================================================
+     HEADING
+
+     FIGMA:
+     248 × 29px
+     Lustria
+     24px
+     120%
+  ======================================================= */
+
+  .ee-product-grid__heading {
+    margin: 0 0 20px;
+
+    padding: 0;
+
+    font-family: "Lustria", Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    letter-spacing: 0;
+
+    color: #000;
+
+    white-space: nowrap;
+  }
+
+
+  /* =======================================================
+     PRODUCT GRID
+
+     FIGMA:
+     Width: 342px
+
+     169px + 4px + 169px = 342px
+
+     Height:
+     186.42px × 3 rows
+     + 4px × 2 gaps
+     = 567.26px
+  ======================================================= */
+
+  .ee-product-grid__items {
+    width: 342px;
+    max-width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 4px;
+    row-gap: 4px;
+  }
+
+
+  /* =======================================================
+     PRODUCT IMAGE CARD
+
+     FIGMA:
+     169 × 186.42
+  ======================================================= */
+
+  .ee-product-grid__item {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 169 / 186.42;
+
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .ee-product-grid__image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    margin: 0;
+    padding: 0;
+  }
+
+
+  /* =======================================================
+     MOBILE HOTSPOT
+
+     FIGMA selected hotspot:
+     approx 15.71 × 15.71px
+
+     Desktop remains 22 × 22.
+  ======================================================= */
+
+  .ee-product-grid__hotspot {
+    width: 16px;
+    height: 16px;
+
+    padding: 0;
+
+    border-width: 1px;
+
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1;
+
+    background: rgba(248, 248, 248, 0.9);
+  }
+
+}
