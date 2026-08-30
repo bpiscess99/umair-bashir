@@ -61,13 +61,25 @@
         select.addEventListener("change", updateVariant);
       });
 
-      function getSelectedOptions() {
-  const selectedOptions = [];
+   function getSelectedOptions() {
+  const optionCount = variants[0]?.options?.length || 0;
+
+  const selectedOptions = new Array(optionCount).fill("");
 
   modal.querySelectorAll("[data-ee-option-group]").forEach((group) => {
     const optionPosition =
       Number(group.dataset.eeOptionPosition) - 1;
 
+    // Safety check
+    if (
+      Number.isNaN(optionPosition) ||
+      optionPosition < 0 ||
+      optionPosition >= optionCount
+    ) {
+      return;
+    }
+
+    // Color / button option
     const selectedButton = group.querySelector(
       "[data-ee-option-value].is-selected",
     );
@@ -79,81 +91,52 @@
       return;
     }
 
+    // Select option such as Size
     const select = group.querySelector(
       ".ee-product-option__select",
     );
 
-    selectedOptions[optionPosition] = select
-      ? select.value
-      : "";
+    selectedOptions[optionPosition] =
+      select ? select.value : "";
   });
 
   return selectedOptions;
 }
 
-      // function getSelectedOptions() {
-      //   return [...modal.querySelectorAll("[data-ee-option-group]")].map(
-      //     (group) => {
-      //       const selectedButton = group.querySelector(
-      //         "[data-ee-option-value].is-selected",
-      //       );
 
-      //       if (selectedButton) {
-      //         return selectedButton.dataset.eeOptionValue;
-      //       }
-
-      //       const select = group.querySelector(".ee-product-option__select");
-
-      //       return select ? select.value : "";
-      //     },
-      //   );
-      // }
-
-      // function updateVariant() {
-      //   const selectedOptions = getSelectedOptions();
-
-      //   const variant = variants.find((variant) => {
-      //     return variant.options.every(
-      //       (option, index) => option === selectedOptions[index],
-      //     );
-      //   });
-
-      //   if (!variant) {
-      //     addButton.disabled = true;
-      //     addButton.innerHTML = "UNAVAILABLE";
-
-      //     return;
-      //   }
-
-      //   addButton.dataset.variantId = variant.id;
-
-      //   if (priceElement) {
-      //     priceElement.textContent = variant.price;
-      //   }
-
-      //   if (variant.available) {
-      //     addButton.disabled = false;
-
-      //     addButton.innerHTML = "ADD TO CART <span>→</span>";
-      //   } else {
-      //     addButton.disabled = true;
-      //     addButton.innerHTML = "SOLD OUT";
-      //   }
-      // }
- function updateVariant() {
+function updateVariant() {
   const selectedOptions = getSelectedOptions();
 
+  // Remove previous Add To Cart success/error message
+  if (statusElement) {
+    statusElement.textContent = "";
+  }
+
+  /*
+    User has not completed all variant selections yet.
+    Example:
+    Color = Blue
+    Size = "Choose your size"
+  */
   const hasMissingOption = selectedOptions.some(
     (option) => !option,
   );
 
   if (hasMissingOption) {
     addButton.disabled = true;
+
     addButton.innerHTML =
       "ADD TO CART <span>→</span>";
+
+    // Important: remove old variant ID
+    delete addButton.dataset.variantId;
+
     return;
   }
 
+  /*
+    Find exact Shopify variant from selected options.
+  */
   const variant = variants.find((variant) => {
     return variant.options.every(
       (option, index) =>
@@ -161,23 +144,39 @@
     );
   });
 
+  /*
+    Combination does not exist.
+  */
   if (!variant) {
     addButton.disabled = true;
     addButton.innerHTML = "UNAVAILABLE";
+
+    delete addButton.dataset.variantId;
+
     return;
   }
 
+  /*
+    Correct variant found.
+  */
   addButton.dataset.variantId = variant.id;
 
   if (priceElement) {
     priceElement.textContent = variant.price;
   }
 
+  /*
+    Variant exists and can be purchased.
+  */
   if (variant.available) {
     addButton.disabled = false;
+
     addButton.innerHTML =
       "ADD TO CART <span>→</span>";
   } else {
+    /*
+      Variant exists but Shopify says it's unavailable.
+    */
     addButton.disabled = true;
     addButton.innerHTML = "SOLD OUT";
   }
