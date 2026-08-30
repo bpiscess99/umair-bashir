@@ -1053,7 +1053,7 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
 
 /* =========================================================
-   COLOR OPTIONS
+   COLOR OPTIONS CONTAINER
    DESKTOP + MOBILE
 ========================================================= */
 
@@ -1068,9 +1068,10 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
   gap: 0;
 
-  border: 1px solid #8c8c8c;
+  /* Border will be drawn by ::before */
+  border: 0;
 
-  background: #ffffff;
+  background: #fff;
 
   overflow: hidden;
 
@@ -1078,45 +1079,25 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 }
 
 
-.ee-product-option__color {
-  position: relative;
+/* =========================================================
+   FULL OUTER BORDER
+   This guarantees:
+   left + top + right + bottom
+========================================================= */
 
-  width: 100%;
-  height: 40px;
-  min-width: 0;
+.ee-product-option__colors::before {
+  content: "";
 
-  margin: 0;
-  padding: 0 12px;
+  position: absolute;
+  inset: 0;
 
-  border: 0;
-
-  /* Dynamic Figma color strip */
-  border-left: 5px solid var(--ee-swatch, #000);
-
-  display: flex;
-  align-items: center;
-
-  background: #ffffff;
-  color: #000000;
-
-  font-family: "Jost", Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1;
-
-  text-align: left;
-  white-space: nowrap;
-
-  cursor: pointer;
+  border: 1px solid #8c8c8c;
 
   box-sizing: border-box;
-}
 
+  pointer-events: none;
 
-/* Selected color should NOT become black background */
-.ee-product-option__color.is-selected {
-  background: #ffffff;
-  color: #000000;
+  z-index: 10;
 }
 
 
@@ -1139,40 +1120,9 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
 
   transform: translateX(-0.5px);
 
-  z-index: 5;
-
   pointer-events: none;
-}
 
-
-/* =========================================================
-   MOBILE BORDER FIX
-========================================================= */
-
-@media screen and (max-width: 749px) {
-
-  /*
-    Shopify mobile preview was hiding the bottom edge,
-    so draw it independently.
-  */
-  .ee-product-option__colors::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 1px;
-
-    background: #8c8c8c;
-
-    z-index: 6;
-
-    pointer-events: none;
-  }
-
+  z-index: 11;
 }
 
 /* =========================================================
