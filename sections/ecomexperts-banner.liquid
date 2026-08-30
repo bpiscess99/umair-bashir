@@ -6,14 +6,17 @@
   <div class="ee-banner__top">
 
    <button
-    type="button"
-    class="ee-banner__menu-toggle"
-    aria-label="Open menu"
-  >
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+  type="button"
+  class="ee-banner__menu-toggle"
+  aria-label="Open menu"
+  aria-expanded="false"
+  aria-controls="ee-mobile-menu-{{ section.id }}"
+  data-ee-mobile-menu-toggle
+>
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
 
     <div class="ee-banner__logo">
       {{ section.settings.logo_text }}
@@ -35,6 +38,31 @@
     </a>
 
   </div>
+
+  </div>
+
+<div
+  id="ee-mobile-menu-{{ section.id }}"
+  class="ee-banner__mobile-menu"
+  data-ee-mobile-menu
+  hidden
+>
+  <div class="ee-banner__mobile-menu-message">
+    {{ section.settings.top_message }}
+  </div>
+
+  <a
+    href="{{ section.settings.top_button_link | default: '#' }}"
+    class="ee-button ee-button--yellow ee-banner__mobile-menu-button"
+  >
+    <span class="ee-button__text">
+      {{ section.settings.top_button_text }}
+    </span>
+
+    <span class="ee-button__arrow" aria-hidden="true">→</span>
+  </a>
+</div>
+
 
   <!-- Main 1440 × 780 hero -->
   <div class="ee-banner__hero">

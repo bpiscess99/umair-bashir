@@ -177,11 +177,66 @@
     });
   }
 
+  function initEcomExpertsMobileMenu(root = document) {
+  const banners = root.querySelectorAll(".ee-banner");
+
+  banners.forEach((banner) => {
+    const toggle = banner.querySelector("[data-ee-mobile-menu-toggle]");
+    const menu = banner.querySelector("[data-ee-mobile-menu]");
+
+    if (!toggle || !menu || toggle.dataset.eeMenuInitialized) return;
+
+    toggle.dataset.eeMenuInitialized = "true";
+
+    function closeMenu() {
+      menu.hidden = true;
+
+      toggle.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open menu");
+    }
+
+    function openMenu() {
+      menu.hidden = false;
+
+      toggle.classList.add("is-open");
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Close menu");
+    }
+
+    toggle.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    menu.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    });
+  });
+}
+
   document.addEventListener("DOMContentLoaded", () => {
-    initEcomExpertsProducts();
+      initEcomExpertsProducts();
+  initEcomExpertsMobileMenu();
   });
 
   document.addEventListener("shopify:section:load", (event) => {
-    initEcomExpertsProducts(event.target);
+     initEcomExpertsProducts(event.target);
+  initEcomExpertsMobileMenu(event.target);
   });
+
+
 })();
