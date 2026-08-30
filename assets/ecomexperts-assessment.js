@@ -79,37 +79,76 @@
         );
       }
 
+      // function updateVariant() {
+      //   const selectedOptions = getSelectedOptions();
+
+      //   const variant = variants.find((variant) => {
+      //     return variant.options.every(
+      //       (option, index) => option === selectedOptions[index],
+      //     );
+      //   });
+
+      //   if (!variant) {
+      //     addButton.disabled = true;
+      //     addButton.innerHTML = "UNAVAILABLE";
+
+      //     return;
+      //   }
+
+      //   addButton.dataset.variantId = variant.id;
+
+      //   if (priceElement) {
+      //     priceElement.textContent = variant.price;
+      //   }
+
+      //   if (variant.available) {
+      //     addButton.disabled = false;
+
+      //     addButton.innerHTML = "ADD TO CART <span>→</span>";
+      //   } else {
+      //     addButton.disabled = true;
+      //     addButton.innerHTML = "SOLD OUT";
+      //   }
+      // }
       function updateVariant() {
-        const selectedOptions = getSelectedOptions();
+  const selectedOptions = getSelectedOptions();
 
-        const variant = variants.find((variant) => {
-          return variant.options.every(
-            (option, index) => option === selectedOptions[index],
-          );
-        });
+  // User has not selected every required option yet
+  const hasMissingOption = selectedOptions.some((option) => !option);
 
-        if (!variant) {
-          addButton.disabled = true;
-          addButton.innerHTML = "UNAVAILABLE";
+  if (hasMissingOption) {
+    addButton.disabled = true;
+    addButton.innerHTML = "ADD TO CART <span>→</span>";
+    return;
+  }
 
-          return;
-        }
+  const variant = variants.find((variant) => {
+    return variant.options.every(
+      (option, index) => option === selectedOptions[index],
+    );
+  });
 
-        addButton.dataset.variantId = variant.id;
+  // Full combination selected, but no such variant exists
+  if (!variant) {
+    addButton.disabled = true;
+    addButton.innerHTML = "UNAVAILABLE";
+    return;
+  }
 
-        if (priceElement) {
-          priceElement.textContent = variant.price;
-        }
+  addButton.dataset.variantId = variant.id;
 
-        if (variant.available) {
-          addButton.disabled = false;
+  if (priceElement) {
+    priceElement.textContent = variant.price;
+  }
 
-          addButton.innerHTML = "ADD TO CART <span>→</span>";
-        } else {
-          addButton.disabled = true;
-          addButton.innerHTML = "SOLD OUT";
-        }
-      }
+  if (variant.available) {
+    addButton.disabled = false;
+    addButton.innerHTML = "ADD TO CART <span>→</span>";
+  } else {
+    addButton.disabled = true;
+    addButton.innerHTML = "SOLD OUT";
+  }
+}
 
       addButton?.addEventListener("click", async () => {
         const variantId = Number(addButton.dataset.variantId);
