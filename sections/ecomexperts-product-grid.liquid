@@ -1,89 +1,137 @@
 {{ 'ecomexperts-assessment.css' | asset_url | stylesheet_tag }}
 
-<section class="ee-product-grid">
+{% assign bonus_variant = section.settings.bonus_product.selected_or_first_available_variant %}
+
+
+<section 
+class="ee-product-grid"
+data-ee-bonus-variant-id="{{ bonus_variant.id }}"
+>
 
   <h2 class="ee-product-grid__heading">
     {{ section.settings.heading }}
   </h2>
 
-  {% if section.settings.collection != blank %}
 
-    <div class="ee-product-grid__items">
+  {% comment %}
+    =========================================================
+    PRODUCT GRID
 
-      {% for product in section.settings.collection.products limit: 6 %}
+    Six products are selected individually from the
+    Shopify Theme Customizer.
 
-  {% assign selected_variant = product.selected_or_first_available_variant %}
+    This directly follows the assessment requirement:
+    "six blocks, each for one product, and the products
+    should be selectable from the customizer"
+    =========================================================
+  {% endcomment %}
 
-  <div class="ee-product-grid__item">
+  <div class="ee-product-grid__items">
 
-    {% if product.featured_image != blank %}
-      {{
-        product.featured_image
-        | image_url: width: 900
-        | image_tag:
-          class: 'ee-product-grid__image',
-          loading: 'lazy',
-          alt: product.title
-      }}
-    {% endif %}
+    {% for i in (1..6) %}
 
-    {% case forloop.index %}
-      {% when 1 %}
-        {% assign hotspot_x = '61.8%' %}
-        {% assign hotspot_y = '56.1%' %}
+      {% capture product_setting_id %}
+        product_{{ i }}
+      {% endcapture %}
 
-      {% when 2 %}
-        {% assign hotspot_x = '84.6%' %}
-        {% assign hotspot_y = '52.5%' %}
+      {% assign product_setting_id = product_setting_id | strip %}
+      {% assign product = section.settings[product_setting_id] %}
 
-      {% when 3 %}
-        {% assign hotspot_x = '63%' %}
-        {% assign hotspot_y = '21%' %}
+      {% if product != blank %}
 
-      {% when 4 %}
-        {% assign hotspot_x = '72.2%' %}
-        {% assign hotspot_y = '18.5%' %}
+        {% assign selected_variant = product.selected_or_first_available_variant %}
 
-      {% when 5 %}
-        {% assign hotspot_x = '51.6%' %}
-        {% assign hotspot_y = '25.9%' %}
+        <div class="ee-product-grid__item">
 
-      {% when 6 %}
-        {% assign hotspot_x = '76.3%' %}
-        {% assign hotspot_y = '39.4%' %}
-    {% endcase %}
+          {% if product.featured_image != blank %}
+            {{
+              product.featured_image
+              | image_url: width: 900
+              | image_tag:
+                class: 'ee-product-grid__image',
+                loading: 'lazy',
+                alt: product.title
+            }}
+          {% endif %}
 
-    <button
-      type="button"
-      class="ee-product-grid__hotspot"
-      aria-label="View {{ product.title }}"
-      data-ee-open-modal="ee-product-modal-{{ section.id }}-{{ product.id }}"
-      style="
-        --ee-hotspot-x: {{ hotspot_x }};
-        --ee-hotspot-y: {{ hotspot_y }};
-      "
-    >
-      +
-    </button>
+
+          {% comment %}
+            Exact Figma hotspot positions
+          {% endcomment %}
+
+          {% case i %}
+
+            {% when 1 %}
+              {% assign hotspot_x = '61.8%' %}
+              {% assign hotspot_y = '56.1%' %}
+
+            {% when 2 %}
+              {% assign hotspot_x = '84.6%' %}
+              {% assign hotspot_y = '52.5%' %}
+
+            {% when 3 %}
+              {% assign hotspot_x = '63%' %}
+              {% assign hotspot_y = '21%' %}
+
+            {% when 4 %}
+              {% assign hotspot_x = '72.2%' %}
+              {% assign hotspot_y = '18.5%' %}
+
+            {% when 5 %}
+              {% assign hotspot_x = '51.6%' %}
+              {% assign hotspot_y = '25.9%' %}
+
+            {% when 6 %}
+              {% assign hotspot_x = '76.3%' %}
+              {% assign hotspot_y = '39.4%' %}
+
+          {% endcase %}
+
+
+          <button
+            type="button"
+            class="ee-product-grid__hotspot"
+            aria-label="View {{ product.title | escape }}"
+            data-ee-open-modal="ee-product-modal-{{ section.id }}-{{ i }}-{{ product.id }}"
+            style="
+              --ee-hotspot-x: {{ hotspot_x }};
+              --ee-hotspot-y: {{ hotspot_y }};
+            "
+          >
+            +
+          </button>
+
+        </div>
+
+      {% endif %}
+
+    {% endfor %}
 
   </div>
 
-      {% endfor %}
 
-    </div>
+  {% comment %}
+    =========================================================
+    PRODUCT QUICK VIEW MODALS
+    =========================================================
+  {% endcomment %}
 
+  {% for i in (1..6) %}
 
-    {% comment %}
-      Product quick-view modals
-    {% endcomment %}
+    {% capture product_setting_id %}
+      product_{{ i }}
+    {% endcapture %}
 
-    {% for product in section.settings.collection.products limit: 6 %}
+    {% assign product_setting_id = product_setting_id | strip %}
+    {% assign product = section.settings[product_setting_id] %}
+
+    {% if product != blank %}
 
       {% assign selected_variant = product.selected_or_first_available_variant %}
 
       <div
         class="ee-product-modal"
-        id="ee-product-modal-{{ section.id }}-{{ product.id }}"
+        id="ee-product-modal-{{ section.id }}-{{ i }}-{{ product.id }}"
         hidden
       >
 
@@ -94,11 +142,12 @@
           data-ee-close-modal
         ></button>
 
+
         <div
           class="ee-product-modal__dialog"
           role="dialog"
           aria-modal="true"
-          aria-labelledby="ee-product-title-{{ product.id }}"
+          aria-labelledby="ee-product-title-{{ section.id }}-{{ i }}-{{ product.id }}"
         >
 
           <button
@@ -109,6 +158,13 @@
           >
             ×
           </button>
+
+
+          {% comment %}
+            =================================================
+            PRODUCT INFORMATION
+            =================================================
+          {% endcomment %}
 
           <div class="ee-product-modal__top">
 
@@ -125,14 +181,16 @@
 
             {% endif %}
 
+
             <div class="ee-product-modal__info">
 
               <h3
                 class="ee-product-modal__title"
-                id="ee-product-title-{{ product.id }}"
+                id="ee-product-title-{{ section.id }}-{{ i }}-{{ product.id }}"
               >
                 {{ product.title }}
               </h3>
+
 
               <div
                 class="ee-product-modal__price"
@@ -140,6 +198,7 @@
               >
                 {{ selected_variant.price | money }}
               </div>
+
 
               <div class="ee-product-modal__description">
                 {{ product.description | strip_html | truncate: 140 }}
@@ -150,122 +209,175 @@
           </div>
 
 
+          {% comment %}
+            =================================================
+            PRODUCT OPTIONS
+            =================================================
+          {% endcomment %}
+
           <div class="ee-product-modal__options">
 
-  {% comment %}
-    Render COLOR first regardless of Shopify option order
-  {% endcomment %}
 
-  {% for option in product.options_with_values %}
+            {% comment %}
+              -----------------------------------------------
+              COLOR / COLOUR
 
-    {% assign option_name = option.name | downcase %}
+              Color is intentionally rendered first to match
+              the supplied Figma design regardless of the
+              Shopify product option order.
+              -----------------------------------------------
+            {% endcomment %}
 
-    {% if option_name contains 'color' or option_name contains 'colour' %}
+            {% for option in product.options_with_values %}
 
-      {% assign option_index = option.position | minus: 1 %}
-      {% assign selected_value = selected_variant.options[option_index] %}
+              {% assign option_name = option.name | downcase %}
 
-      <div
-        class="ee-product-option"
-        data-ee-option-group
-         data-ee-option-position="{{ option.position }}"
-      >
+              {% if option_name contains 'color' or option_name contains 'colour' %}
 
-        <div class="ee-product-option__label">
-          {{ option.name }}
-        </div>
+                {% assign option_index = option.position | minus: 1 %}
+                {% assign selected_value = selected_variant.options[option_index] %}
 
-        <div class="ee-product-option__colors">
+                <div
+                  class="ee-product-option"
+                  data-ee-option-group
+                  data-ee-option-position="{{ option.position }}"
+                >
 
-          {% for value in option.values %}
-
-            {% assign swatch_color = value | downcase %}
-
-            <button
-              type="button"
-              class="ee-product-option__color{% if value == selected_value %} is-selected{% endif %}"
-              data-ee-option-value="{{ value | escape }}"
-              style="--ee-swatch: {{ swatch_color }};"
-            >
-              {{ value }}
-            </button>
-
-          {% endfor %}
-
-        </div>
-
-      </div>
-
-    {% endif %}
-
-  {% endfor %}
+                  <div class="ee-product-option__label">
+                    {{ option.name }}
+                  </div>
 
 
-  {% comment %}
-    Render SIZE and all other options after Color
-  {% endcomment %}
+                  <div class="ee-product-option__colors">
 
-  {% for option in product.options_with_values %}
+                    {% for value in option.values %}
 
-    {% assign option_name = option.name | downcase %}
+                      {% assign swatch_color = value | downcase %}
 
-    {% unless option_name contains 'color' or option_name contains 'colour' %}
+                      <button
+                        type="button"
+                        class="
+                          ee-product-option__color
+                          {% if value == selected_value %}
+                            is-selected
+                          {% endif %}
+                        "
+                        data-ee-option-value="{{ value | escape }}"
+                        style="--ee-swatch: {{ swatch_color }};"
+                      >
+                        {{ value }}
+                      </button>
 
-      {% assign option_index = option.position | minus: 1 %}
-      {% assign selected_value = selected_variant.options[option_index] %}
+                    {% endfor %}
 
-      <div
-        class="ee-product-option"
-        data-ee-option-group
-         data-ee-option-position="{{ option.position }}"
-      >
+                  </div>
 
-        <div class="ee-product-option__label">
-          {{ option.name }}
-        </div>
+                </div>
 
-        <select class="ee-product-option__select">
-  {% if option_name contains 'size' %}
-    <option value="" selected disabled>
-      Choose your size
-    </option>
-  {% endif %}
+              {% endif %}
 
-  {% for value in option.values %}
-    <option
-      value="{{ value | escape }}"
-      {% unless option_name contains 'size' %}
-        {% if value == selected_value %}selected{% endif %}
-      {% endunless %}
-    >
-      {{ value }}
-    </option>
-  {% endfor %}
-</select>
+            {% endfor %}
 
-      </div>
 
-    {% endunless %}
+            {% comment %}
+              -----------------------------------------------
+              SIZE + OTHER OPTIONS
 
-  {% endfor %}
+              All non-color options appear after Color.
+              -----------------------------------------------
+            {% endcomment %}
 
-</div>
+            {% for option in product.options_with_values %}
 
+              {% assign option_name = option.name | downcase %}
+
+              {% unless option_name contains 'color' or option_name contains 'colour' %}
+
+                {% assign option_index = option.position | minus: 1 %}
+                {% assign selected_value = selected_variant.options[option_index] %}
+
+                <div
+                  class="ee-product-option"
+                  data-ee-option-group
+                  data-ee-option-position="{{ option.position }}"
+                >
+
+                  <div class="ee-product-option__label">
+                    {{ option.name }}
+                  </div>
+
+
+                  <select class="ee-product-option__select">
+
+                    {% if option_name contains 'size' %}
+
+                      <option
+                        value=""
+                        selected
+                        disabled
+                      >
+                        Choose your size
+                      </option>
+
+                    {% endif %}
+
+
+                    {% for value in option.values %}
+
+                      <option
+                        value="{{ value | escape }}"
+
+                        {% unless option_name contains 'size' %}
+                          {% if value == selected_value %}
+                            selected
+                          {% endif %}
+                        {% endunless %}
+                      >
+                        {{ value }}
+                      </option>
+
+                    {% endfor %}
+
+                  </select>
+
+                </div>
+
+              {% endunless %}
+
+            {% endfor %}
+
+          </div>
+
+
+          {% comment %}
+            =================================================
+            ADD TO CART
+            =================================================
+          {% endcomment %}
 
           <button
             type="button"
             class="ee-product-modal__add"
             data-ee-add-to-cart
             data-variant-id="{{ selected_variant.id }}"
-            {% unless selected_variant.available %}disabled{% endunless %}
+            {% unless selected_variant.available %}
+              disabled
+            {% endunless %}
           >
+
             {% if selected_variant.available %}
+
               ADD TO CART
               <span>→</span>
+
             {% else %}
+
               SOLD OUT
+
             {% endif %}
+
           </button>
+
 
           <div
             class="ee-product-modal__status"
@@ -273,6 +385,12 @@
             aria-live="polite"
           ></div>
 
+
+          {% comment %}
+            =================================================
+            PRODUCT VARIANT DATA FOR VANILLA JAVASCRIPT
+            =================================================
+          {% endcomment %}
 
           <script
             type="application/json"
@@ -285,7 +403,8 @@
                   "available": {{ variant.available | json }},
                   "options": {{ variant.options | json }},
                   "price": {{ variant.price | money | json }}
-                }{% unless forloop.last %},{% endunless %}
+                }
+                {% unless forloop.last %},{% endunless %}
               {% endfor %}
             ]
           </script>
@@ -294,11 +413,12 @@
 
       </div>
 
-    {% endfor %}
+    {% endif %}
 
-  {% endif %}
+  {% endfor %}
 
 </section>
+
 
 <script
   src="{{ 'ecomexperts-assessment.js' | asset_url }}"
@@ -309,19 +429,64 @@
 {% schema %}
 {
   "name": "EcomExperts Product Grid",
+
   "settings": [
+
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Tisso vison in the wild"
     },
+
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
-    }
+      "type": "header",
+      "content": "Grid products"
+    },
+
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "Product 1"
+    },
+
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Product 2"
+    },
+
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Product 3"
+    },
+
+    {
+      "type": "product",
+      "id": "product_4",
+      "label": "Product 4"
+    },
+
+    {
+      "type": "product",
+      "id": "product_5",
+      "label": "Product 5"
+    },
+
+    {
+      "type": "product",
+      "id": "product_6",
+      "label": "Product 6"
+    },
+    {
+  "type": "product",
+  "id": "bonus_product",
+  "label": "Bonus product"
+}
+
   ],
+
   "presets": [
     {
       "name": "EcomExperts Product Grid"
