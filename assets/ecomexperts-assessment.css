@@ -401,6 +401,7 @@ body:has(.ee-banner) .shopify-section-group-footer-group {
     max-width: 375px;
     margin: 0 auto;
     overflow: hidden;
+    position: relative;
   }
 
 
