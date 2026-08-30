@@ -62,22 +62,52 @@
       });
 
       function getSelectedOptions() {
-        return [...modal.querySelectorAll("[data-ee-option-group]")].map(
-          (group) => {
-            const selectedButton = group.querySelector(
-              "[data-ee-option-value].is-selected",
-            );
+  const selectedOptions = [];
 
-            if (selectedButton) {
-              return selectedButton.dataset.eeOptionValue;
-            }
+  modal.querySelectorAll("[data-ee-option-group]").forEach((group) => {
+    const optionPosition =
+      Number(group.dataset.eeOptionPosition) - 1;
 
-            const select = group.querySelector(".ee-product-option__select");
+    const selectedButton = group.querySelector(
+      "[data-ee-option-value].is-selected",
+    );
 
-            return select ? select.value : "";
-          },
-        );
-      }
+    if (selectedButton) {
+      selectedOptions[optionPosition] =
+        selectedButton.dataset.eeOptionValue;
+
+      return;
+    }
+
+    const select = group.querySelector(
+      ".ee-product-option__select",
+    );
+
+    selectedOptions[optionPosition] = select
+      ? select.value
+      : "";
+  });
+
+  return selectedOptions;
+}
+
+      // function getSelectedOptions() {
+      //   return [...modal.querySelectorAll("[data-ee-option-group]")].map(
+      //     (group) => {
+      //       const selectedButton = group.querySelector(
+      //         "[data-ee-option-value].is-selected",
+      //       );
+
+      //       if (selectedButton) {
+      //         return selectedButton.dataset.eeOptionValue;
+      //       }
+
+      //       const select = group.querySelector(".ee-product-option__select");
+
+      //       return select ? select.value : "";
+      //     },
+      //   );
+      // }
 
       // function updateVariant() {
       //   const selectedOptions = getSelectedOptions();
@@ -110,25 +140,27 @@
       //     addButton.innerHTML = "SOLD OUT";
       //   }
       // }
-      function updateVariant() {
+ function updateVariant() {
   const selectedOptions = getSelectedOptions();
 
-  // User has not selected every required option yet
-  const hasMissingOption = selectedOptions.some((option) => !option);
+  const hasMissingOption = selectedOptions.some(
+    (option) => !option,
+  );
 
   if (hasMissingOption) {
     addButton.disabled = true;
-    addButton.innerHTML = "ADD TO CART <span>→</span>";
+    addButton.innerHTML =
+      "ADD TO CART <span>→</span>";
     return;
   }
 
   const variant = variants.find((variant) => {
     return variant.options.every(
-      (option, index) => option === selectedOptions[index],
+      (option, index) =>
+        option === selectedOptions[index],
     );
   });
 
-  // Full combination selected, but no such variant exists
   if (!variant) {
     addButton.disabled = true;
     addButton.innerHTML = "UNAVAILABLE";
@@ -143,7 +175,8 @@
 
   if (variant.available) {
     addButton.disabled = false;
-    addButton.innerHTML = "ADD TO CART <span>→</span>";
+    addButton.innerHTML =
+      "ADD TO CART <span>→</span>";
   } else {
     addButton.disabled = true;
     addButton.innerHTML = "SOLD OUT";
