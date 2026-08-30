@@ -39,15 +39,34 @@
   <!-- Main 1440 × 780 hero -->
   <div class="ee-banner__hero">
 
-    {% if section.settings.background_image != blank %}
-      {{
-        section.settings.background_image
-        | image_url: width: 2880
-        | image_tag:
-          class: 'ee-banner__image',
-          loading: 'eager'
-      }}
-    {% endif %}
+ {% comment %}
+  Desktop banner artwork
+{% endcomment %}
+
+{% if section.settings.background_image != blank %}
+  {{
+    section.settings.background_image
+    | image_url: width: 2880
+    | image_tag:
+      class: 'ee-banner__image ee-banner__image--desktop',
+      loading: 'eager'
+  }}
+{% endif %}
+
+
+{% comment %}
+  Mobile banner artwork
+{% endcomment %}
+
+{% if section.settings.mobile_background_image != blank %}
+  {{
+    section.settings.mobile_background_image
+    | image_url: width: 1372
+    | image_tag:
+      class: 'ee-banner__image ee-banner__image--mobile',
+      loading: 'eager'
+  }}
+{% endif %}
 
     <div class="ee-banner__content">
 
